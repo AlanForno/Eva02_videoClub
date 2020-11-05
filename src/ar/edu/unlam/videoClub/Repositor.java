@@ -22,21 +22,6 @@ public class Repositor extends Empleado{
 		peliculas.remove(pelicula);
 	}
 
-	public Integer getCodigoRepositor() {
-		return codigoRepositor;
-	}
-
-	public void setCodigoRepositor(Integer codigoRepositor) {
-		this.codigoRepositor = codigoRepositor;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 	/*
 	Comento estos codigos porque no me cierran mucho. (Mariano)
 
@@ -55,6 +40,22 @@ public class Repositor extends Empleado{
 	public void setPeliculas(HashSet<Pelicula> peliculas) {
 		this.peliculas = peliculas;
 	}
-	
 
+	public Integer getCodigoRepositor() {
+		return codigoRepositor;
+	}
+
+	public void setCodigoRepositor(Integer codigoRepositor) {
+		this.codigoRepositor = codigoRepositor;
+	}
+
+	@Override
+	public String getNombre() {
+		return nombre;
+	}
+
+	@Override
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 }

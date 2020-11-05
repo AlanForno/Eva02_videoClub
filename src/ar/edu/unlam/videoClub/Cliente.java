@@ -5,9 +5,11 @@ import java.util.HashSet;
 public class Cliente {
 	private String nombre;
 	private Integer codigoCliente;
-	private HashSet<Pelicula> peliculasAlquiladas;
-	
-	
+
+	public Cliente(String nombre, Integer codigoCliente){
+		this.nombre=nombre;
+		this.codigoCliente=codigoCliente;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -20,15 +22,4 @@ public class Cliente {
 	public void setCodigoCliente(Integer codigoCliente) {
 		this.codigoCliente = codigoCliente;
 	}
-	public HashSet<Pelicula> getPeliculasAlquiladas() {
-		return peliculasAlquiladas;
-	}
-	public void setPeliculasAlquiladas(HashSet<Pelicula> peliculasAlquiladas) {
-		this.peliculasAlquiladas = peliculasAlquiladas;
-	}
-	
-	
-	
-	
-
 }

@@ -1,5 +1,7 @@
 package ar.edu.unlam.videoClub;
 
+import java.util.Objects;
+
 public class Empleado {
 
     private String nombre;
@@ -24,5 +26,19 @@ public class Empleado {
 
     public void setCodigoEmpleado(Integer codigoEmpleado) {
         this.codigoEmpleado = codigoEmpleado;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Empleado empleado = (Empleado) o;
+        return Objects.equals(nombre, empleado.nombre) &&
+                Objects.equals(codigoEmpleado, empleado.codigoEmpleado);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, codigoEmpleado);
     }
 }
