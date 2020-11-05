@@ -5,15 +5,22 @@ import java.util.HashSet;
 public class Vendedor {
 	private String nombre;
 	private Integer codigoVendedor;
-	private HashSet<Pelicula>peliculasAlquiladas;
+	private HashSet<Pelicula>peliculas;
 	
-	Vendedor(String nombre, Integer codigoVendedor){
+	public Vendedor(String nombre, Integer codigoVendedor){
 		this.nombre=nombre;
 		this.codigoVendedor=codigoVendedor;
 	}
 	
-	public Boolean alquilarPeliculas(HashSet<Pelicula>listaDePeliculas,Integer codigoPelicula,Cliente cliente) {
-		return null;
+	public void alquilarPeliculas(Pelicula pelicula,Integer codigoPelicula,Cliente cliente) {
+		/* en este caso puse .remove porque
+			alquila una pelicula, osea, la saca de la lista
+
+			No se como se utilizaría codigoPelicula y cliente
+
+			(Mariano)
+		 */
+		peliculas.remove(pelicula);
 	}
 
 }
