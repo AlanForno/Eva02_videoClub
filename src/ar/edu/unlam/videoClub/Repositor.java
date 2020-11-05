@@ -6,19 +6,19 @@ public class Repositor {
 	private Integer codigoRepositor;
 	private String nombre;
 	private HashSet<Pelicula> peliculasParaQuitar;
-	private HashSet<Pelicula> paliculasParaAgregar;
+	private HashSet<Pelicula> peliculas;
 	
-	Repositor(String nombre,Integer codigoRepositor){
+	public Repositor(String nombre,Integer codigoRepositor){
 		this.nombre=nombre;
 		this.codigoRepositor=codigoRepositor;
 	}
 	
-	public Boolean agregarNuevaPelicula() {
-		return null;
+	public void agregarNuevaPelicula(Pelicula pelicula) {
+		peliculas.add(pelicula);
 	}
 	
-	public Boolean quitarPelicula(HashSet<Pelicula>listaDePeliculas) {
-		return null;
+	public void quitarPelicula(Pelicula pelicula) {
+		peliculas.remove(pelicula);
 	}
 
 	public Integer getCodigoRepositor() {
@@ -36,6 +36,8 @@ public class Repositor {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	/*
+	Comento estos codigos porque no me cierran mucho. (Mariano)
 
 	public HashSet<Pelicula> getPeliculasParaQuitar() {
 		return peliculasParaQuitar;
@@ -43,14 +45,14 @@ public class Repositor {
 
 	public void setPeliculasParaQuitar(HashSet<Pelicula> peliculasParaQuitar) {
 		this.peliculasParaQuitar = peliculasParaQuitar;
+	}*/
+
+	public HashSet<Pelicula> getPeliculas() {
+		return peliculas;
 	}
 
-	public HashSet<Pelicula> getPaliculasParaAgregar() {
-		return paliculasParaAgregar;
-	}
-
-	public void setPaliculasParaAgregar(HashSet<Pelicula> paliculasParaAgregar) {
-		this.paliculasParaAgregar = paliculasParaAgregar;
+	public void setPeliculas(HashSet<Pelicula> peliculas) {
+		this.peliculas = peliculas;
 	}
 	
 

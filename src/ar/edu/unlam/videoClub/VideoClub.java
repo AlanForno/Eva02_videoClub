@@ -35,7 +35,7 @@ public class VideoClub {
 	public HashSet<Pelicula> listaDePeliculas() {
 		HashSet<Pelicula>peliculas=new HashSet<>();
 		for(Repositor prueba:this.listaRepositor) {
-			peliculas.addAll(prueba.getPaliculasParaAgregar());
+			peliculas.addAll(prueba.getPeliculas());
 		}
 		return peliculas;
 	}
