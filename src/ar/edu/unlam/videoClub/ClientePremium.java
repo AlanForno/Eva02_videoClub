@@ -3,7 +3,10 @@ package ar.edu.unlam.videoClub;
 import java.util.Objects;
 
 public class ClientePremium extends ClienteMedio {
-
+    /*
+    se me ocurrio agregarle una constante al constructo con el porcetnaje que le corresponde por
+    ser clientePremium pero no se como se haria (mariano)
+     */
     private Boolean alquilarPeliculasLibremente;
 
     public ClientePremium(String nombre, Integer codigoCliente, Integer limiteDePeliculas, Boolean isMenosDeEdad, Double porcentajeDeDescuento, Boolean alquilarPeliculasLibremente) {
