@@ -3,6 +3,7 @@ package ar.edu.unlam.videoClub;
 import java.util.HashSet;
 
 public class Cliente {
+	
 	private String nombre;
 	private Integer codigoCliente;
 
@@ -10,12 +11,11 @@ public class Cliente {
 		this.nombre=nombre;
 		this.codigoCliente=codigoCliente;
 	}
+	
 	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+	
 	public Integer getCodigoCliente() {
 		return codigoCliente;
 	}

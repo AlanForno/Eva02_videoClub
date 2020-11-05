@@ -53,9 +53,6 @@ public class Repositor extends Empleado{
 	public String getNombre() {
 		return nombre;
 	}
+	// elimine el metodo setNombre() porque no creo que sea necesario (Alan)
 
-	@Override
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 }

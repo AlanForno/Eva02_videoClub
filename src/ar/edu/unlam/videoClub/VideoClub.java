@@ -7,28 +7,49 @@ import java.util.HashSet;
 public class VideoClub {
 	private String nombre;
 	private HashSet<Cliente>listaCliente;
-	private HashSet<Pelicula>listaPaliculas;
+	private HashSet<Pelicula>listaPeliculas;
 	private HashSet<Repositor>listaRepositor;
 	
 	VideoClub(String nombre){
 		this.nombre=nombre;
-		this.listaCliente=new HashSet<>();
-		this.listaPaliculas=new HashSet<>();
-		this.listaRepositor=new HashSet<>();
+		this.listaCliente = new HashSet<>();
+		this.listaPeliculas = new HashSet<>();
+		this.listaRepositor = new HashSet<>();
 		
 	}
 	public Boolean agregarCliente(Cliente nuevo) {
-		return null;
+		return listaCliente.add(nuevo);
 	}
 	
 	public Boolean agregarRepositor(Repositor nuevo) {
-		return null;
+		return listaRepositor.add(nuevo);
 	}
+	
 	public Boolean agregarPelicula(Integer codigoRepositor,Pelicula nueva) {
-		return null;
+		/*
+		 * 
+		 */
+		for (Repositor empleadoRepositor : listaRepositor) {
+			if (empleadoRepositor.getCodigoEmpleado() != null) {
+				listaPeliculas.add(nueva);
+				return true;
+			}
+		}
+		return false;
 	}
-	public Boolean quitarPelicula(Integer codigoRepositor,Integer codigoDePelicula) {
-		return null;
+	/*
+	 * cambie la firma del metodo quitarPelicula (Integer codigoRepositor, Pelicula codigoDePelicula
+	 * y usamos el metodo getCodigoDePelicula, no estoy muy seguro si esta bien (Alan)
+	 */
+	public Boolean quitarPelicula(Integer codigoRepositor, Pelicula peliculaAQuitar) {
+		
+		for (Pelicula pelicula : listaPeliculas) {
+			if (agregarPelicula(codigoRepositor, peliculaAQuitar) == true) {
+				listaPeliculas.remove(peliculaAQuitar);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public Boolean alquilarPelicula(Integer codigoCliente,Integer codigoPelicula) {

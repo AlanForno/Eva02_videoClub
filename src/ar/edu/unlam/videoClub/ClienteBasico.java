@@ -1,10 +1,12 @@
 package ar.edu.unlam.videoClub;
 
-public class ClienteBasico extends Cliente{
+public class ClienteBasico extends Cliente {
 
     private Integer limiteDePeliculas;
     private Boolean isMenosDeEdad;
-
+    /*aca sugiero que el atributo isMenorDeEdad sea un Integer edad y que se evalue si es o no menor de edad el cliente
+    (Alan)
+	*/
     public ClienteBasico(String nombre, Integer codigoCliente, Integer limiteDePeliculas, Boolean isMenosDeEdad) {
         super(nombre, codigoCliente);
         this.limiteDePeliculas = limiteDePeliculas;

@@ -21,17 +21,17 @@ public class Vendedor extends Empleado{
 
 			(Mariano)
 		 */
+		/*
+		 *  creo que este metodo seria algo asi como una copia de arrays
+		 *  osea en la clase cliente el cuando alquila copia la pelicula a su array
+		 *  pero tampoco estoy muy seguro de si esta bien la logica esa (Alan)
+		 */
 		peliculas.remove(pelicula);
 	}
 
 	@Override
 	public String getNombre() {
 		return nombre;
-	}
-
-	@Override
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public Integer getCodigoVendedor() {

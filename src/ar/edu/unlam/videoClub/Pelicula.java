@@ -1,6 +1,7 @@
 package ar.edu.unlam.videoClub;
 
 public class Pelicula {
+	
 	private String nombre;
 	private Integer codigoPelicula;
 
@@ -12,12 +13,11 @@ public class Pelicula {
 	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+	
 	public Integer getCodigoPelicula() {
 		return codigoPelicula;
 	}
+	
 	public void setCodigoPelicula(Integer codigoPelicula) {
 		this.codigoPelicula = codigoPelicula;
 	}
