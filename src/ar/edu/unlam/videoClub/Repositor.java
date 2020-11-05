@@ -2,17 +2,18 @@ package ar.edu.unlam.videoClub;
 
 import java.util.HashSet;
 
-public class Repositor {
+public class Repositor extends Empleado{
 	private Integer codigoRepositor;
 	private String nombre;
-	private HashSet<Pelicula> peliculasParaQuitar;
+	/*private HashSet<Pelicula> peliculasParaQuitar;*/
 	private HashSet<Pelicula> peliculas;
-	
-	public Repositor(String nombre,Integer codigoRepositor){
-		this.nombre=nombre;
-		this.codigoRepositor=codigoRepositor;
+
+	public Repositor(String nombre, Integer codigoEmpleado) {
+		super(nombre, codigoEmpleado);
+		this.codigoRepositor = codigoEmpleado;
+		this.nombre = nombre;
 	}
-	
+
 	public void agregarNuevaPelicula(Pelicula pelicula) {
 		peliculas.add(pelicula);
 	}
