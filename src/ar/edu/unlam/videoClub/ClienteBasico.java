@@ -1,31 +1,22 @@
 package ar.edu.unlam.videoClub;
 
-public class ClienteBasico extends Cliente {
+import java.util.HashSet;
 
-    private Integer limiteDePeliculas;
-    private Boolean isMenosDeEdad;
-    /*aca sugiero que el atributo isMenorDeEdad sea un Integer edad y que se evalue si es o no menor de edad el cliente
-    (Alan)
-	*/
-    public ClienteBasico(String nombre, Integer codigoCliente, Integer limiteDePeliculas, Boolean isMenosDeEdad) {
-        super(nombre, codigoCliente);
-        this.limiteDePeliculas = limiteDePeliculas;
-        this.isMenosDeEdad = isMenosDeEdad;
-    }
+public class ClienteBasico extends Cliente {    
 
-    public Integer getLimiteDePeliculas() {
-        return limiteDePeliculas;
+    
+    public ClienteBasico(String nombre, Integer codigoCliente, Integer edad, Double dinero) {
+        super(nombre, codigoCliente,edad,dinero);
+        limiteDePeliculas =5; // este cliente puede tener hasta 5 peliculas.
+        porcentaje = 0.0; // este tipo de cliente no va a tener descuento.
+        listaDePeliculas= new HashSet <Pelicula>(limiteDePeliculas); // su lista se limita a 5.
+        
+        
     }
-
-    public void setLimiteDePeliculas(Integer limiteDePeliculas) {
-        this.limiteDePeliculas = limiteDePeliculas;
-    }
-
-    public Boolean getMenosDeEdad() {
-        return isMenosDeEdad;
-    }
-
-    public void setMenosDeEdad(Boolean menosDeEdad) {
-        isMenosDeEdad = menosDeEdad;
-    }
+    
+    
+    
+    
+    
+   
 }

@@ -1,34 +1,16 @@
 package ar.edu.unlam.videoClub;
 
+import java.util.HashSet;
 import java.util.Objects;
 
-public class ClienteMedio extends ClienteBasico{
+public class ClienteMedio extends Cliente {
 
-    private Double porcentajeDeDescuento;
+	public ClienteMedio(String nombre, Integer codigoCliente, Integer edad, Double dinero) {
+		super(nombre, codigoCliente, edad, dinero);
+		limiteDePeliculas = 10; // este cliente puede tener hasta 10 peliculas.
+		porcentaje = 10.0; // este tipo de cliente va a tener 10 % de descuento.
+		listaDePeliculas = new HashSet<Pelicula>(limiteDePeliculas); // su lista se limita a 10.
 
-    public ClienteMedio(String nombre, Integer codigoCliente, Integer limiteDePeliculas, Boolean isMenosDeEdad, Double porcentajeDeDescuento) {
-        super(nombre, codigoCliente, limiteDePeliculas, isMenosDeEdad);
-        this.porcentajeDeDescuento = porcentajeDeDescuento;
-    }
+	}
 
-    public Double getPorcentajeDeDescuento() {
-        return porcentajeDeDescuento;
-    }
-
-    public void setPorcentajeDeDescuento(Double porcentajeDeDescuento) {
-        this.porcentajeDeDescuento = porcentajeDeDescuento;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ClienteMedio that = (ClienteMedio) o;
-        return porcentajeDeDescuento.equals(that.porcentajeDeDescuento);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(porcentajeDeDescuento);
-    }
 }
