@@ -1,38 +1,28 @@
 package ar.edu.unlam.videoClub;
 
+import java.util.HashSet;
 import java.util.Objects;
 
-public class ClientePremium extends ClienteMedio {
-    /*
-    se me ocurrio agregarle una constante al constructo con el porcetnaje que le corresponde por
-    ser clientePremium pero no se como se haria (mariano)
-     */
-    private Boolean alquilarPeliculasLibremente;
+public class ClientePremium extends Cliente {
 
-    public ClientePremium(String nombre, Integer codigoCliente, Integer limiteDePeliculas, Boolean isMenosDeEdad, Double porcentajeDeDescuento, Boolean alquilarPeliculasLibremente) {
-        super(nombre, codigoCliente, limiteDePeliculas, isMenosDeEdad, porcentajeDeDescuento);
-        this.alquilarPeliculasLibremente = alquilarPeliculasLibremente;
-    }
+	public ClientePremium(String nombre, Integer codigoCliente, Integer edad, Double dinero) {
+		super(nombre, codigoCliente, edad, dinero);
+		porcentaje = 30.0; // SE LE VA HACER UN 30 % DE DESCUENTO AL VALOR DE LA PELICULA.
+		listaDePeliculas = new HashSet<Pelicula>(); // NO TIENE LIMITES DE PELICULAS
 
-    public Boolean getAlquilarPeliculasLibremente() {
-        return alquilarPeliculasLibremente;
-    }
+	}
 
-    public void setAlquilarPeliculasLibremente(Boolean alquilarPeliculasLibremente) {
-        this.alquilarPeliculasLibremente = alquilarPeliculasLibremente;
-    }
+	@Override
+	public Boolean alquilarPelicula(Pelicula pelicula) {
+		if (dinero - pelicula.getValor() > 0) {
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        ClientePremium that = (ClientePremium) o;
-        return alquilarPeliculasLibremente.equals(that.alquilarPeliculasLibremente);
-    }
+			dinero -= pelicula.getValor() - ((porcentaje * pelicula.getValor()) / 100);
+			// dinero es igual a el valor de la pelicula menos el descuento de la pelicula.
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), alquilarPeliculasLibremente);
-    }
+			return listaDePeliculas.add(pelicula); // no es necesario que el cliente premium valide ni la edad, ni si
+													// alcanzo el limite de peliculas, si que tenga el dinero suficiente
+													// y que el elemento no este repetido
+		}
+		return false;
+	}
 }

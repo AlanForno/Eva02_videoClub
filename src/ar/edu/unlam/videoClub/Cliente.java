@@ -25,7 +25,7 @@ public abstract class Cliente { // por defecto todos los clientes van a tener es
 		this.dinero = dinero;
 	}
 
-	public boolean alquilarPelicula(Pelicula pelicula) {
+	public Boolean alquilarPelicula(Pelicula pelicula) {
 		// en videoClub donde se va usar este metodo, al pasar por
 		// parametro un cliente ya existente y una pelicula ya
 		// existente, se va a recorrer la lista
@@ -55,7 +55,7 @@ public abstract class Cliente { // por defecto todos los clientes van a tener es
 		// si no verifica ni la primera , da false;
 	}
 
-	private boolean verificarSiLeAlcanzaYSiCumpleLaEdad(Pelicula pelicula) {
+	private Boolean verificarSiLeAlcanzaYSiCumpleLaEdad(Pelicula pelicula) {
 		if (dinero - pelicula.getValor() > 0) { // si al restarle a su dinero el valor de la pelicula sigue teniendo
 												// dinero.
 			if (edad > pelicula.getAptaParaMayoresDe()) {
@@ -67,7 +67,7 @@ public abstract class Cliente { // por defecto todos los clientes van a tener es
 		return false;
 	}
 
-	public boolean devolverPelicula(Pelicula pelicula) { // recibo por parametro la pelicula a devolver
+	public Boolean devolverPelicula(Pelicula pelicula) { // recibo por parametro la pelicula a devolver
 
 		return listaDePeliculas.remove(pelicula); // remueve el elemento si lo contiene y es igual.
 

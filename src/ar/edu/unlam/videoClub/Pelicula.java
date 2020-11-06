@@ -38,6 +38,31 @@ public class Pelicula {
 		return aptaParaMayoresDe;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigoPelicula == null) ? 0 : codigoPelicula.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) { //dos objetos pelicula son iguales cuando su codigo es igual.
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pelicula other = (Pelicula) obj;
+		if (codigoPelicula == null) {
+			if (other.codigoPelicula != null)
+				return false;
+		} else if (!codigoPelicula.equals(other.codigoPelicula))
+			return false;
+		return true;
+	}
+
 	
 
 	
