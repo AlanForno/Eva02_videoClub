@@ -14,8 +14,8 @@ public class Repositor extends Empleado{
 		this.nombre = nombre;
 	}
 
-	public void agregarNuevaPelicula(Pelicula pelicula) {
-		peliculas.add(pelicula);
+	public Boolean agregarNuevaPelicula(Pelicula pelicula) {
+		return peliculas.add(pelicula);
 	}
 	
 	public void quitarPelicula(Pelicula pelicula) {

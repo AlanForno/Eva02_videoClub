@@ -9,13 +9,14 @@ public class VideoClub {
 	private HashSet<Cliente>listaCliente;
 	private HashSet<Pelicula>listaPeliculas;
 	private HashSet<Repositor>listaRepositor;
+	private HashSet<Pelicula>listaDePeliculasAlquiladas;
 	
 	VideoClub(String nombre){
 		this.nombre=nombre;
 		this.listaCliente = new HashSet<>();
 		this.listaPeliculas = new HashSet<>();
 		this.listaRepositor = new HashSet<>();
-		
+		this.listaDePeliculasAlquiladas=new HashSet<>();
 	}
 	public Boolean agregarCliente(Cliente nuevo) {
 		return listaCliente.add(nuevo);
@@ -26,13 +27,27 @@ public class VideoClub {
 	}
 	
 	public Boolean agregarPelicula(Integer codigoRepositor,Pelicula nueva) {
-		/*
-		 * 
-		 */
-		for (Repositor empleadoRepositor : listaRepositor) {
-			if (empleadoRepositor.getCodigoEmpleado() != null) {
-				listaPeliculas.add(nueva);
-				return true;
+		Boolean resultado=false;
+		if(existePelicula(nueva.getCodigoPelicula())==false) {
+			for (Repositor empleadoRepositor : this.listaRepositor) {
+			if (empleadoRepositor.getCodigoEmpleado().equals(codigoRepositor)) {
+				resultado=empleadoRepositor.agregarNuevaPelicula(nueva);
+			}
+		}
+		}
+		
+		return false;
+	}
+	private Boolean existePelicula(Integer id) {
+		Boolean resultado=false;
+		for(Pelicula prueba:this.listaPeliculas) {
+			if(prueba.getCodigoPelicula().equals(id)) {
+				resultado=true;
+			}
+		}
+		for(Pelicula prueba:this.listaDePeliculasAlquiladas) {
+			if(prueba.getCodigoPelicula().equals(id)){
+				resultado=true;
 			}
 		}
 		return false;
@@ -61,6 +76,16 @@ public class VideoClub {
 			peliculas.addAll(prueba.getPeliculas());
 		}
 		return peliculas;
+	}
+	
+	
+	public Boolean queSeaDeLaClaseClientePremium() {
+		for(Cliente prueba:this.listaCliente) {
+			if(prueba instanceof ClienteBasico) {
+				return true;
+			}
+		}
+		return false;
 	}
 	  
 
