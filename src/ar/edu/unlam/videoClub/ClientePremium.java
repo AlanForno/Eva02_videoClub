@@ -14,7 +14,7 @@ public class ClientePremium extends Cliente {
 
 	@Override
 	public Boolean alquilarPelicula(Pelicula pelicula) {
-		if (dinero - pelicula.getValor() > 0) {
+		if (dinero - pelicula.getValor() >= 0) {
 
 			dinero -= pelicula.getValor() - ((porcentaje * pelicula.getValor()) / 100);
 			// dinero es igual a el valor de la pelicula menos el descuento de la pelicula.

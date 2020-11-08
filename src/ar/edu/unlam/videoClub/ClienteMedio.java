@@ -9,7 +9,7 @@ public class ClienteMedio extends Cliente {
 		super(nombre, codigoCliente, edad, dinero);
 		limiteDePeliculas = 10; // este cliente puede tener hasta 10 peliculas.
 		porcentaje = 10.0; // este tipo de cliente va a tener 10 % de descuento.
-		listaDePeliculas = new HashSet<Pelicula>(limiteDePeliculas); // su lista se limita a 10.
+		listaDePeliculas = new HashSet<Pelicula>(); // su lista se limita a 10.
 
 	}
 
