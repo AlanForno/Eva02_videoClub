@@ -3,9 +3,12 @@ package ar.edu.unlam.videoClub;
 import java.util.HashSet;
 
 public class Vendedor extends Empleado{
+	
 	private String nombre;
 	private Integer codigoVendedor;
-	private HashSet<Pelicula>peliculas;
+	private HashSet<Pelicula> peliculas;
+	
+	private Integer cantidadPeliculasAlquladas;
 
 	public Vendedor(String nombre, Integer codigoEmpleado) {
 		super(nombre, codigoEmpleado);
@@ -13,7 +16,12 @@ public class Vendedor extends Empleado{
 		this.codigoVendedor = codigoEmpleado;
 	}
 
-	public void alquilarPeliculas(Pelicula pelicula, Integer codigoPelicula, Cliente cliente) {
+	/*
+	 * modifique la firma del segundo parametro (codigoDePelicula) porque 
+	 * con el primer parametro al ser de tipo objeto ya podemos sacar informacion 
+	 * del objeto pelicula (nombre, codigo, precio, etc)
+	 */
+	public void alquilarPeliculas(Pelicula pelicula, Cliente cliente) {
 		/* en este caso puse .remove porque
 			alquila una pelicula, osea, la saca de la lista
 
@@ -22,11 +30,18 @@ public class Vendedor extends Empleado{
 			(Mariano)
 		 */
 		/*
-		 *  creo que este metodo seria algo asi como una copia de arrays
-		 *  osea en la clase cliente el cuando alquila copia la pelicula a su array
-		 *  pero tampoco estoy muy seguro de si esta bien la logica esa (Alan)
+		 * esto de aca no se si esta bien pero deberia copiar el objeto pasado por parametro
+		 * (cliente) hacia la variable clienteEjemplo
 		 */
+		Cliente clienteEjemplo = cliente;
+		
+		clienteEjemplo.alquilarPelicula(pelicula);
 		peliculas.remove(pelicula);
+		cantidadPeliculasAlquladas++;
+	}
+	
+	public Integer obtenerCantidadDePeliculasAlquiladas() {
+		return cantidadPeliculasAlquladas;
 	}
 
 	@Override
@@ -37,8 +52,5 @@ public class Vendedor extends Empleado{
 	public Integer getCodigoVendedor() {
 		return codigoVendedor;
 	}
-
-	public void setCodigoVendedor(Integer codigoVendedor) {
-		this.codigoVendedor = codigoVendedor;
-	}
+	
 }
