@@ -5,9 +5,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import ar.edu.unlam.videoClub.Vendedor;
-import ar.edu.unlam.videoClub.Test.*;
-
 public class TestVendedor {
 
 	@Test
