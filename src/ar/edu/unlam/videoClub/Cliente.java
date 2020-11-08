@@ -34,29 +34,33 @@ public abstract class Cliente { // por defecto todos los clientes van a tener es
 		// se remueve esa pelicula de la lista y se la agrega a la lista
 		// de ese cliente con el metodo comprar
 
-		if (verificarSiLeAlcanzaYSiCumpleLaEdad(pelicula) == true) {
-			// si este metodo valida todo ok.
-			if (listaDePeliculas.add(pelicula) == true) {
-				// si puede agregar una pelicula mas. (por el limite de peliculas)
+		if (verificarSiPuedeAgregarMasPeliculas() == true) {
+			// si el tamaño de la lista no es mayor al limite.
+			if (verificarSiLeAlcanzaYSiCumpleLaEdad(pelicula) == true) {
+				// si este metodo valida todo ok.
+				if (listaDePeliculas.add(pelicula) == true) {
+					// si puede agregar una pelicula mas. (por el limite de peliculas)
 
-				dinero -= pelicula.getValor() - ((porcentaje * pelicula.getValor()) / 100);
-				// dinero es igual a el valor de la pelicula menos el descuento de la pelicula.
+					dinero -= pelicula.getValor() - ((porcentaje * pelicula.getValor()) / 100);
+					// dinero es igual a el valor de la pelicula menos el descuento de la pelicula.
 
-				listaDePeliculas.add(pelicula);
-				return true;
-				// si cumple los 2 if , lo agrega a la lista y le descuenta dinero
+					listaDePeliculas.add(pelicula);
+					return true;
+					// si cumple los 2 if , lo agrega a la lista y le descuenta dinero
+				}
+
+				return false;
+				// si cumple la primera pero la segunda no (debido a que se alcanzo el limite)
+				// da false
 			}
-
 			return false;
-			// si cumple la primera pero la segunda no (debido a que se alcanzo el limite)
-			// da false
+			// si no verifica ni la primera , da false;
 		}
 		return false;
-		// si no verifica ni la primera , da false;
 	}
 
 	private Boolean verificarSiLeAlcanzaYSiCumpleLaEdad(Pelicula pelicula) {
-		if (dinero - pelicula.getValor() > 0) { // si al restarle a su dinero el valor de la pelicula sigue teniendo
+		if (dinero - pelicula.getValor() >= 0.0) { // si al restarle a su dinero el valor de la pelicula sigue teniendo
 												// dinero.
 			if (edad > pelicula.getAptaParaMayoresDe()) {
 				return true;
@@ -67,9 +71,26 @@ public abstract class Cliente { // por defecto todos los clientes van a tener es
 		return false;
 	}
 
+	private Boolean verificarSiPuedeAgregarMasPeliculas() {
+		if (listaDePeliculas.size() < limiteDePeliculas) {
+			return true;
+		}
+		return false;
+	}
+
 	public Boolean devolverPelicula(Pelicula pelicula) { // recibo por parametro la pelicula a devolver
 
 		return listaDePeliculas.remove(pelicula); // remueve el elemento si lo contiene y es igual.
+
+	}
+
+	public Pelicula buscarSiTieneUnaPelicula(Pelicula pelicula) {
+		for (Pelicula peli : listaDePeliculas) {
+			if (peli.equals(pelicula)) {
+				return peli; // si encuentra la pelicula te la devuelve
+			}
+		}
+		return null; // sino te devuelve un null.
 
 	}
 
@@ -117,8 +138,8 @@ public abstract class Cliente { // por defecto todos los clientes van a tener es
 		return dinero;
 	}
 
-	public void setDinero(Double dinero) {
-		this.dinero = dinero;
+	public void TraerMasPlata(Double dinero) {
+		this.dinero += dinero;
 	}
 
 }

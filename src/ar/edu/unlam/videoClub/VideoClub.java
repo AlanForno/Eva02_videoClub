@@ -48,6 +48,7 @@ public class VideoClub {
 	}
 	
 	private Pelicula encontrarPeliculaDisponiblePorId(Integer id) {//La busta entre las listas de peliculas y alquiladas 
+		this.listaPeliculas=listaDePeliculas();
 		Pelicula resultado=null;
 		for(Pelicula prueba:this.listaPeliculas) {
 			if(prueba.getCodigoPelicula().equals(id)) {
@@ -61,6 +62,7 @@ public class VideoClub {
 	public Boolean quitarPelicula(Integer codigoRepositor, Integer idPeliculaAQuitar) {
 		Boolean resultado=false;
 		Pelicula deposito=encontrarPeliculaDisponiblePorId(idPeliculaAQuitar);
+		this.listaPeliculas=listaDePeliculas();
 		
 		if((encontrarEmpleadoPorId(codigoRepositor) instanceof Repositor)==true) {
 			if(deposito!=null) {
@@ -86,8 +88,11 @@ public class VideoClub {
 	
 	public HashSet<Pelicula> listaDePeliculas() {
 		HashSet<Pelicula>peliculas=new HashSet<>();
-		for(Repositor prueba:this.listaDeEmpleados) {
-			peliculas.addAll(prueba.getPeliculas());
+		for(Empleado prueba:this.listaDeEmpleados) {
+			if((prueba instanceof Repositor)==true ) {
+				peliculas.addAll(((Repositor)prueba).getPeliculas());
+			}
+			
 		}
 		return peliculas;
 	}
@@ -101,6 +106,8 @@ public class VideoClub {
 		}
 		return false;
 	}
+	
+	
 	  
 
 }

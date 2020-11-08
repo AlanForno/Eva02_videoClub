@@ -14,6 +14,7 @@ public class TestVC {
 		
 		assertTrue(mania.agregarCliente(yo));
 		assertFalse(mania.queSeaDeLaClaseClientePremium());
+		
 	}
 
 }
