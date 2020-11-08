@@ -8,7 +8,7 @@ public class Pelicula {
 	private Integer aptaParaMayoresDe;
 
 	public Pelicula(String nombre, Integer codigoPelicula, Double valor, Integer aptaParaMayoresDe){
-		this.nombre=nombre;
+		this.nombre = nombre;
 		this.codigoPelicula=codigoPelicula;
 		this.valor = valor;
 		this.aptaParaMayoresDe = aptaParaMayoresDe;
