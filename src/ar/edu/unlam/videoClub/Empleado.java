@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Empleado {
 
-    private String nombre;
-    private Integer codigoEmpleado;
+    protected String nombre; //los atribuos deben ser protected
+    protected Integer codigoEmpleado;
 
     public Empleado(String nombre,Integer codigoEmpleado ){
         this.nombre=nombre;
