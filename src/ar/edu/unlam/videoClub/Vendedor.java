@@ -6,9 +6,9 @@ public class Vendedor extends Empleado{
 	
 	private String nombre;
 	private Integer codigoVendedor;
-	private HashSet<Pelicula> peliculas;
+	private HashSet<Pelicula> listaDePeliculas;
 	
-	private Integer cantidadPeliculasAlquladas;
+	private Integer cantidadlistaDePeliculasAlquladas;
 
 	public Vendedor(String nombre, Integer codigoEmpleado) {
 		super(nombre, codigoEmpleado);
@@ -21,7 +21,7 @@ public class Vendedor extends Empleado{
 	 * con el primer parametro al ser de tipo objeto ya podemos sacar informacion 
 	 * del objeto pelicula (nombre, codigo, precio, etc)
 	 */
-	public void alquilarPeliculas(Pelicula pelicula, Cliente cliente) {
+	public Boolean alquilarPelicula(Pelicula pelicula, Cliente cliente) {
 		/* en este caso puse .remove porque
 			alquila una pelicula, osea, la saca de la lista
 
@@ -29,19 +29,18 @@ public class Vendedor extends Empleado{
 
 			(Mariano)
 		 */
-		/*
-		 * esto de aca no se si esta bien pero deberia copiar el objeto pasado por parametro
-		 * (cliente) hacia la variable clienteEjemplo
-		 */
-		Cliente clienteEjemplo = cliente;
+		Boolean seAlquiloLaPelicula = false;
 		
-		clienteEjemplo.alquilarPelicula(pelicula);
-		peliculas.remove(pelicula);
-		cantidadPeliculasAlquladas++;
+		if (cliente.alquilarPelicula(pelicula) == true) {
+			listaDePeliculas.remove(pelicula);
+			seAlquiloLaPelicula = true;
+		}
+		
+		return seAlquiloLaPelicula;
 	}
 	
-	public Integer obtenerCantidadDePeliculasAlquiladas() {
-		return cantidadPeliculasAlquladas;
+	public Integer obtenerCantidadDelistaDePeliculasAlquiladas() {
+		return cantidadlistaDePeliculasAlquladas;
 	}
 
 	@Override
