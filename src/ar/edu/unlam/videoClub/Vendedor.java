@@ -2,16 +2,19 @@ package ar.edu.unlam.videoClub;
 
 import java.util.HashSet;
 
+import ar.edu.unlam.videoClub.Cliente;
+
 public class Vendedor extends Empleado {
 
 	// vendedor extiende de empleado, ya tiene incorporado los atributos.
 
 	private HashSet<Pelicula> listaDePeliculas;
-
-	private Integer cantidadlistaDePeliculasAlquladas;
+	
+	private HashSet<Pelicula> registroDePeliculasAlquiladas;
 
 	public Vendedor(String nombre, Integer codigoEmpleado) {
 		super(nombre, codigoEmpleado);
+		this.registroDePeliculasAlquiladas = new HashSet<Pelicula>();
 	}
 
 	// Mariano te dejo este metodo para desarrollar asi vinculamos cliente con
@@ -25,7 +28,31 @@ public class Vendedor extends Empleado {
 		// despues usa el metodo de cliente.alquilar(pelicula); si esto es posible, hay
 		// que pensar como restar esa pelicula de la lista de peliculas y agregarla a la
 		// lista de peliculas alquiladas
-		return false;
+		Boolean seEncontroAlCliente = false;
+		Boolean seAlquiloLaPelicula = false;
+		
+		for (Cliente clientes : listaCliente) {
+			if (clientes.getCodigoCliente().equals(cliente.getCodigoCliente())) {
+				seEncontroAlCliente = true;
+			}
+		}
+		if (seEncontroAlCliente == true) {			
+			for (Pelicula peliculas : listaPeliculas) {
+				if (peliculas.getCodigoPelicula().equals(pelicula.getCodigoPelicula())) {
+					// el cliente alquila la pelicula (se agrega a su lista de peliculas)
+					cliente.alquilarPelicula(pelicula);
+					// se agrega al registro de peliculas alquiladas
+					listaDePeliculasAlquiladas.add(pelicula);
+					// se borra la pelicula de la lista (se borra del stock)
+					listaDePeliculas.remove(pelicula);
+					
+					seAlquiloLaPelicula = true;
+				}
+			}
+		}
+		
+		
+		return seAlquiloLaPelicula;
 	}
 
 	public Boolean recibirPelicula(HashSet<Cliente> listaCliente, Cliente cliente, HashSet<Pelicula> listaPeliculas,
@@ -35,7 +62,22 @@ public class Vendedor extends Empleado {
 		// ahorrar codigo) 
 		// entonces a listaPeliculas le agregas pelicula con un add (osea cliente lo devuelve y lo agregas a la lista.
 		// y luego  a listaDePelis le sacas la pelicula.
-		return false;
+		Boolean seRecibioLaPelicula = false;
+		
+		for (Cliente clientes : listaCliente) {
+			if (clientes.getCodigoCliente().equals(cliente.getCodigoCliente())) {
+				// el cliente devuelve la peli pasa por parametro (se borra de su lista)				
+				cliente.devolverPelicula(pelicula);				
+				// se agrega la peli pasada por paraetro a la lista de pelis
+				listaDePeliculas.add(pelicula);
+				// al no estar alquilada porque la devolvio el cliente se borra del registro de alquileres
+				listaDePeliculasAlquiladas.remove(pelicula);
+				
+				seRecibioLaPelicula = true;
+			}
+		}
+		
+		return seRecibioLaPelicula;
 	}
 
 	public Boolean alquilarPelicula(Pelicula pelicula, Cliente cliente) {
@@ -48,18 +90,20 @@ public class Vendedor extends Empleado {
 		 * (Mariano)
 		 */
 		Boolean seAlquiloLaPelicula = false;
-
-		if (cliente.alquilarPelicula(pelicula) == true) {
-			listaDePeliculas.remove(pelicula);
+		Cliente ejemplo = cliente;
+		
+		if (ejemplo.getListaDePeliculas().contains(pelicula) == true) {
 			seAlquiloLaPelicula = true;
+			registroDePeliculasAlquiladas.add(pelicula);
 		}
-
+		
 		return seAlquiloLaPelicula;
 	}
-
-	public Integer obtenerCantidadDelistaDePeliculasAlquiladas() {
-		return cantidadlistaDePeliculasAlquladas;
+	
+	public Integer obtenerCantidadPeliculasAlquiladas() {
+		return registroDePeliculasAlquiladas.size();
 	}
+
 
 	@Override
 	public String getNombre() {
