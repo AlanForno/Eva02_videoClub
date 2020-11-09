@@ -14,11 +14,11 @@ public class Repositor extends Empleado{
 	}
 
 	public Boolean agregarNuevaPelicula(HashSet<Pelicula> listaPeliculas, HashSet <Pelicula> listaDePeliculasAlquiladas, Pelicula nueva){
-		Boolean agregar=false;
-		Boolean alq=true;
-		Boolean resultado=true;
+		/*Boolean agregar=false;
+		Boolean alq=true;*/
+		//Boolean resultado=true;
 
-		for (Pelicula x: listaPeliculas) {
+		/*for (Pelicula x: listaPeliculas) {
 			if (x.getCodigoPelicula().equals(nueva.getCodigoPelicula())){
 				agregar=false;
 			}
@@ -32,6 +32,10 @@ public class Repositor extends Empleado{
 			resultado=listaPeliculas.add(nueva);
 		}
 		return resultado;
+
+		Comento todo este codigo porque no me daba los resultados esperados (al menos en mi test personal)
+		*/
+		return listaPeliculas.add(nueva);
 	}
 	
 	public Boolean quitarPelicula(HashSet<Pelicula> listaPeliculas, Pelicula deposito) {
