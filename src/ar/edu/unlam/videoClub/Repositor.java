@@ -14,7 +14,8 @@ public class Repositor extends Empleado{
 	}
 
 	public Boolean agregarNuevaPelicula(HashSet<Pelicula> listaPeliculas, HashSet <Pelicula> listaDePeliculasAlquiladas, Pelicula nueva){
-		listaPeliculas.add(nueva);
+		//recorrer la lista de peliculas alquiladas, para ver si no la tiene,
+		listaPeliculas.add(nueva); 
 		return true;
 	}
 	

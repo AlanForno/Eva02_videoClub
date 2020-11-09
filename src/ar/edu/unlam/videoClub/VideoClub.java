@@ -31,7 +31,7 @@ public class VideoClub {
 		
 		if(empleadoRepositor!=null) {
 			if((empleadoRepositor instanceof Repositor)==true) {
-				resultado = empleadoRepositor.agregarNuevaPelicula(this.listaPeliculas, nueva);
+				resultado = empleadoRepositor.agregarNuevaPelicula(this.listaPeliculas,this.listaDePeliculasAlquiladas, nueva);
 			}
 		}
 		
