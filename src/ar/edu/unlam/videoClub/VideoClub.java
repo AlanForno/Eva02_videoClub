@@ -8,6 +8,7 @@ public class VideoClub {
 	private String nombre;
 	private HashSet<Cliente>listaCliente;
 	private HashSet<Pelicula>listaPeliculas;
+
 	private HashSet<Empleado>listaDeEmpleados;
 	private HashSet<Pelicula>listaDePeliculasAlquiladas;
 	
@@ -18,10 +19,10 @@ public class VideoClub {
 		this.listaDeEmpleados = new HashSet<>();
 		this.listaDePeliculasAlquiladas=new HashSet<>();
 	}
+	
 	public Boolean agregarCliente(Cliente nuevo) {
 		return listaCliente.add(nuevo);
 	}
-	
 	public Boolean agregarEmpleadoRepositorOVendedor(Empleado nuevo) {
 		return listaDeEmpleados.add(nuevo);
 	}
@@ -31,35 +32,98 @@ public class VideoClub {
 		Empleado empleadoRepositor=encontrarEmpleadoPorId(codigoRepositor);
 		
 		if(empleadoRepositor!=null) {
-			resultado=((Repositor)empleadoRepositor).agregarNuevaPelicula(this.listaPeliculas,nueva);
+			if((empleadoRepositor instanceof Repositor)==true) {
+//				resultado=((Repositor)empleadoRepositor).agregarNuevaPelicula(this.listaPeliculas, this.listaDePeliculasAlquiladas,nueva);
+			}
 		}
 		
 		return resultado;
 	}
 	
-	
-	
-	
-	public Boolean quitarPelicula(Integer codigoRepositor, Integer idPeliculaAQuitar) {
+	public Boolean quitarPelicula(Integer codigoRepositor,Pelicula nueva) {
+		Empleado empleado=encontrarEmpleadoPorId(codigoRepositor);
 		Boolean resultado=false;
-		Pelicula deposito=encontrarPeliculaDisponiblePorId(idPeliculaAQuitar);
 		
-		if((encontrarEmpleadoPorId(codigoRepositor) instanceof Repositor)==true) {
-			if(deposito!=null) {
-		  resultado=((Repositor)encontrarEmpleadoPorId(codigoRepositor)).quitarPelicula(this.listaPeliculas,deposito);
-			  }
+		if(empleado!=null) {
+			if((empleado instanceof Repositor)==true) {
+				resultado=((Repositor)empleado).quitarPelicula(this.listaPeliculas,nueva);
+			}
+		}
+		return null;
+	}
+	
+	
+	public Boolean alquilarPelicula(Integer idVendedor, Cliente cliente,Pelicula pelicula) {
+		Empleado vendedor=encontrarEmpleadoPorId(idVendedor);
+		Boolean resultado=false;
+		
+		if(vendedor!=null) {
+			if((vendedor instanceof Vendedor)==true) {
+			resultado=((Vendedor)vendedor).alquilarACliente(this.listaCliente, cliente, this.listaPeliculas, pelicula, this.listaDePeliculasAlquiladas);
 		 }
+		}
+		
 		
 		return resultado;
 	}
 	
-	
-	public Boolean alquilarPelicula(Integer codigoCliente,Integer codigoPelicula) {
-		return null;
+	public Boolean devolverPelicula(Integer idVendedor, Cliente cliente,Pelicula pelicula) {
+		Empleado vendedor=encontrarEmpleadoPorId(idVendedor);
+		Boolean resultado=false;
+		
+		if(vendedor!=null) {
+			if((vendedor instanceof Vendedor)==true) {
+			resultado=((Vendedor)vendedor).recibirPelicula(this.listaCliente, cliente, this.listaPeliculas, pelicula, this.listaDePeliculasAlquiladas);
+		}
+		}
+		
+		
+		return resultado;
 	}
+	
+	public Boolean despedirEmpleado(Integer idEmpleado) {
+		Boolean resultado=false;
+		Empleado empleado=encontrarEmpleadoPorId(idEmpleado);
+		
+		for(Empleado prueba:this.listaDeEmpleados) {
+			if(prueba.equals(empleado)) {
+				resultado=this.listaDeEmpleados.remove(prueba);
+			}
+		}
+		return resultado;
+	}
+	
+	public String cantidadDeClientesPorCategoria() {
+		Integer clienteBasico=0;
+		Integer clienteMedio=0;
+		Integer clientePremium=0;
+		
+		for(Cliente cliente:this.listaCliente) {
+			if(cliente instanceof ClienteBasico) {
+				clienteBasico++;
+			}else {if(cliente instanceof ClienteMedio) {
+				clienteMedio++;
+			}else{clientePremium++;}}
+		}
+		return "Cantidad"+'\n'+"clientes basicos="+clienteBasico+'\n'+"clientes medios="+clienteMedio+'\n'+"cientes premium="+clientePremium;
+		
+	}
+	
 	
 	public HashSet<Pelicula> listaDePeliculas() {
 		return this.listaPeliculas;
+	}
+	
+	public HashSet<Cliente> getListaCliente() {
+		return listaCliente;
+	}
+
+	public HashSet<Empleado> getListaDeEmpleados() {
+		return listaDeEmpleados;
+	}
+
+	public HashSet<Pelicula> getListaDePeliculasAlquiladas() {
+		return listaDePeliculasAlquiladas;
 	}
 	
 	

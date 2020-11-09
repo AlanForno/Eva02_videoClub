@@ -12,8 +12,7 @@ public class TestVC {
 		VideoClub mania=new VideoClub("VideoMania");
 		Cliente yo=new ClientePremium("Gerardo",1,18,30d);
 		
-		assertTrue(mania.agregarCliente(yo));
-		assertFalse(mania.queSeaDeLaClaseClientePremium());
+		System.out.println( "Cantidad"+ '\n'+"clientes basicos="+456+'\n'+"clientes medios="+456+'\n'+"cientes premium="+654);
 		
 	}
 

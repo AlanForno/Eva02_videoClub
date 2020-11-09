@@ -72,8 +72,13 @@ public class Vendedor extends Empleado {
 		
 		for (Cliente clientes : listaCliente) {
 			if (clientes.getCodigoCliente().equals(cliente.getCodigoCliente())) {
-				// el cliente devuelve la peli pasa por parametro (se borra de su lista)				
-				cliente.devolverPelicula(pelicula);				
+				// el cliente devuelve la peli pasa por parametro (se borra de su lista)
+				
+				//esta ponelo dentro de un if porque puede devolver un false 
+				cliente.devolverPelicula(pelicula);	
+				
+				
+				
 				// se agrega la peli pasada por paraetro a la lista de pelis
 				listaDePeliculas.add(pelicula);
 				// al no estar alquilada porque la devolvio el cliente se borra del registro de alquileres
