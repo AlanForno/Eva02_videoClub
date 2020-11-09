@@ -31,9 +31,57 @@ public class VideoClub {
 		Empleado empleadoRepositor=encontrarEmpleadoPorId(codigoRepositor);
 		
 		if(empleadoRepositor!=null) {
-			resultado=((Repositor)empleadoRepositor).agregarNuevaPelicula(nueva);
+			resultado=((Repositor)empleadoRepositor).agregarNuevaPelicula(this.listaPeliculas,nueva);
 		}
 		
+		return resultado;
+	}
+	
+	
+	
+	
+	public Boolean quitarPelicula(Integer codigoRepositor, Integer idPeliculaAQuitar) {
+		Boolean resultado=false;
+		Pelicula deposito=encontrarPeliculaDisponiblePorId(idPeliculaAQuitar);
+		
+		if((encontrarEmpleadoPorId(codigoRepositor) instanceof Repositor)==true) {
+			if(deposito!=null) {
+		  resultado=((Repositor)encontrarEmpleadoPorId(codigoRepositor)).quitarPelicula(this.listaPeliculas,deposito);
+			  }
+		 }
+		
+		return resultado;
+	}
+	
+	
+	public Boolean alquilarPelicula(Integer codigoCliente,Integer codigoPelicula) {
+		return null;
+	}
+	
+	public HashSet<Pelicula> listaDePeliculas() {
+		return this.listaPeliculas;
+	}
+	
+	
+	//Aca empizan los metodos Privados
+	
+	private Empleado encontrarEmpleadoPorId(Integer codigoRepositor) {//revisar
+	    Empleado resultado=null;
+		for(Empleado prueba:this.listaDeEmpleados) {
+			if(prueba.getCodigoEmpleado().equals(codigoRepositor)) {
+				resultado=prueba;	
+			}
+		}
+		return resultado;
+	}
+	
+	private Pelicula encontrarPeliculaDisponiblePorId(Integer id) {//La busta entre las listas de peliculas y alquiladas 
+		Pelicula resultado=null;
+		for(Pelicula prueba:this.listaPeliculas) {
+			if(prueba.getCodigoPelicula().equals(id)) {
+				resultado=prueba;
+			}
+		}
 		return resultado;
 	}
 	
@@ -46,67 +94,6 @@ public class VideoClub {
 		}
 		return resultado;
 	}
-	
-	private Pelicula encontrarPeliculaDisponiblePorId(Integer id) {//La busta entre las listas de peliculas y alquiladas 
-		this.listaPeliculas=listaDePeliculas();
-		Pelicula resultado=null;
-		for(Pelicula prueba:this.listaPeliculas) {
-			if(prueba.getCodigoPelicula().equals(id)) {
-				resultado=prueba;
-			}
-		}
-		return resultado;
-	}
-	
-	
-	public Boolean quitarPelicula(Integer codigoRepositor, Integer idPeliculaAQuitar) {
-		Boolean resultado=false;
-		Pelicula deposito=encontrarPeliculaDisponiblePorId(idPeliculaAQuitar);
-		this.listaPeliculas=listaDePeliculas();
-		
-		if((encontrarEmpleadoPorId(codigoRepositor) instanceof Repositor)==true) {
-			if(deposito!=null) {
-		  resultado=((Repositor)encontrarEmpleadoPorId(codigoRepositor)).quitarPelicula(deposito);
-			  }
-		 }
-		
-		return resultado;
-	}
-	
-	private Empleado encontrarEmpleadoPorId(Integer codigoRepositor) {//revisar
-	    Empleado resultado=null;
-		for(Empleado prueba:this.listaDeEmpleados) {
-			if(prueba.getCodigoEmpleado().equals(codigoRepositor)) {
-				resultado=prueba;	
-			}
-		}
-		return resultado;
-	}
-	public Boolean alquilarPelicula(Integer codigoCliente,Integer codigoPelicula) {
-		return null;
-	}
-	
-	public HashSet<Pelicula> listaDePeliculas() {
-		HashSet<Pelicula>peliculas=new HashSet<>();
-		for(Empleado prueba:this.listaDeEmpleados) {
-			if((prueba instanceof Repositor)==true ) {
-				peliculas.addAll(((Repositor)prueba).getPeliculas());
-			}
-			
-		}
-		return peliculas;
-	}
-	
-	
-	public Boolean queSeaDeLaClaseClientePremium() {
-		for(Cliente prueba:this.listaCliente) {
-			if(prueba instanceof ClienteBasico) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	
 	  
 

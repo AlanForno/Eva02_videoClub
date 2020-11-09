@@ -21,7 +21,7 @@ public class Vendedor extends Empleado {
 	// vendedor y ahorramos codigo en videoclub
 
 	public Boolean alquilarACliente(HashSet<Cliente> listaCliente, Cliente cliente, HashSet<Pelicula> listaPeliculas,
-			Pelicula pelicula, HashSet<Pelicula> listaDePeliculasAlquiladas) {
+			                        Pelicula pelicula, HashSet<Pelicula> listaDePeliculasAlquiladas) {
 		// recorre la listaDeCliente si posee a cliente, si lo encontro, recorre
 		// listaDePeliculas si tiene pelicula. (podes hacer un metodo privado para
 		// ahorrar codigo
@@ -40,7 +40,13 @@ public class Vendedor extends Empleado {
 			for (Pelicula peliculas : listaPeliculas) {
 				if (peliculas.getCodigoPelicula().equals(pelicula.getCodigoPelicula())) {
 					// el cliente alquila la pelicula (se agrega a su lista de peliculas)
+					
+					
+					//ponerlo dentro de un if porque puede devolver un false
 					cliente.alquilarPelicula(pelicula);
+					
+					
+					
 					// se agrega al registro de peliculas alquiladas
 					listaDePeliculasAlquiladas.add(pelicula);
 					// se borra la pelicula de la lista (se borra del stock)
@@ -56,7 +62,7 @@ public class Vendedor extends Empleado {
 	}
 
 	public Boolean recibirPelicula(HashSet<Cliente> listaCliente, Cliente cliente, HashSet<Pelicula> listaPeliculas,
-			Pelicula pelicula, HashSet<Pelicula> listaDePeliculasAlquiladas) {
+			                       Pelicula pelicula, HashSet<Pelicula> listaDePeliculasAlquiladas) {
 		// recorre la listaDeCliente si posee a cliente, usa el metodo
 		// cliente.devolverPelicula(pelicula);(podes hacer un metodo privado para
 		// ahorrar codigo) 
