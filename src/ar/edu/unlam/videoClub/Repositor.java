@@ -14,14 +14,29 @@ public class Repositor extends Empleado{
 	}
 
 	public Boolean agregarNuevaPelicula(HashSet<Pelicula> listaPeliculas, HashSet <Pelicula> listaDePeliculasAlquiladas, Pelicula nueva){
-		//recorrer la lista de peliculas alquiladas, para ver si no la tiene,
-		listaPeliculas.add(nueva); 
-		return true;
+		Boolean agregar=false;
+		Boolean alq=true;
+		Boolean resultado=true;
+
+		for (Pelicula x: listaPeliculas) {
+			if (x.getCodigoPelicula().equals(nueva.getCodigoPelicula())){
+				agregar=false;
+			}
+		}
+		for (Pelicula x: listaDePeliculasAlquiladas){
+			if (x.getCodigoPelicula().equals(nueva.getCodigoPelicula())){
+				alq=false;
+			}
+		}
+		if (agregar==true && alq==true){
+			resultado=listaPeliculas.add(nueva);
+		}
+		return resultado;
 	}
 	
 	public Boolean quitarPelicula(HashSet<Pelicula> listaPeliculas, Pelicula deposito) {
-		listaPeliculas.remove(deposito);
-		return true;
+
+		return listaPeliculas.remove(deposito);
 	}
 
 
