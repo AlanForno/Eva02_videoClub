@@ -23,4 +23,13 @@ public class TestVC {
 		
 	}
 
+	@Test
+	public void testuno() {
+
+		VideoClub mania=new VideoClub("VideoMania");
+		Cliente yo=new ClientePremium("Gerardo",1,18,30d);
+		
+		assertTrue(mania.agregarCliente(yo));
+		
+	}
 }

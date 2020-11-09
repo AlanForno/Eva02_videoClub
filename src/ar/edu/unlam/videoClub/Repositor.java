@@ -6,7 +6,6 @@ import java.util.Objects;
 public class Repositor extends Empleado{
 	private Integer codigoRepositor;
 	private String nombre;
-	/*private HashSet<Pelicula> peliculas;*/
 
 	public Repositor(String nombre, Integer codigoEmpleado) {
 		super(nombre, codigoEmpleado);
@@ -14,14 +13,34 @@ public class Repositor extends Empleado{
 		this.nombre = nombre;
 	}
 
-	public Boolean agregarNuevaPelicula(HashSet<Pelicula> listaPeliculas, Pelicula nueva){
-		listaPeliculas.add(nueva);
-		return true;
+	public Boolean agregarNuevaPelicula(HashSet<Pelicula> listaPeliculas, HashSet <Pelicula> listaDePeliculasAlquiladas, Pelicula nueva){
+		/*Boolean agregar=false;
+		Boolean alq=true;*/
+		//Boolean resultado=true;
+
+		/*for (Pelicula x: listaPeliculas) {
+			if (x.getCodigoPelicula().equals(nueva.getCodigoPelicula())){
+				agregar=false;
+			}
+		}
+		for (Pelicula x: listaDePeliculasAlquiladas){
+			if (x.getCodigoPelicula().equals(nueva.getCodigoPelicula())){
+				alq=false;
+			}
+		}
+		if (agregar==true && alq==true){
+			resultado=listaPeliculas.add(nueva);
+		}
+		return resultado;
+
+		Comento todo este codigo porque no me daba los resultados esperados (al menos en mi test personal)
+		*/
+		return listaPeliculas.add(nueva);
 	}
 	
 	public Boolean quitarPelicula(HashSet<Pelicula> listaPeliculas, Pelicula deposito) {
-		listaPeliculas.remove(deposito);
-		return true;
+
+		return listaPeliculas.remove(deposito);
 	}
 
 
@@ -37,21 +56,7 @@ public class Repositor extends Empleado{
 	public String getNombre() {
 		return nombre;
 	}
-	/*
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		if (!super.equals(o)) return false;
-		Repositor repositor = (Repositor) o;
-		return peliculas.equals(repositor.peliculas);
-	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), peliculas);
-	}
 
-	Lo comento porque ya no era funcional al eliminar el HashSet<Pelicula> peliculas
-	*/
+
 }

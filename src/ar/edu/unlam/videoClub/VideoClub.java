@@ -1,9 +1,7 @@
 package ar.edu.unlam.videoClub;
 
 import java.util.HashSet;
-	/*En realidad esto tendría que ser lo más basico de todo si es que
-	estamos respetando la jerarquia/herencia real (Mariano)
-	 */
+
 public class VideoClub {
 	private String nombre;
 	private HashSet<Cliente>listaCliente;
@@ -28,11 +26,15 @@ public class VideoClub {
 	}
 	public Boolean agregarPelicula(Integer codigoRepositor,Pelicula nueva) {
 		Boolean resultado=false;
-		Empleado empleadoRepositor=encontrarEmpleadoPorId(codigoRepositor);
+		Repositor empleadoRepositor=((Repositor)encontrarEmpleadoPorId(codigoRepositor));
 		
 		if(empleadoRepositor!=null) {
 			if((empleadoRepositor instanceof Repositor)==true) {
+<<<<<<< HEAD
 				resultado=((Repositor)empleadoRepositor).agregarNuevaPelicula(this.listaPeliculas, this.listaDePeliculasAlquiladas,nueva);
+=======
+				resultado = empleadoRepositor.agregarNuevaPelicula(this.listaPeliculas,this.listaDePeliculasAlquiladas, nueva);
+>>>>>>> ea7ec36c6745116ecaee081a059663e34218441c
 			}
 		}
 		
