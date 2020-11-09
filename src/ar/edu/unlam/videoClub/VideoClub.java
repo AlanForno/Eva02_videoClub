@@ -30,11 +30,7 @@ public class VideoClub {
 		
 		if(empleadoRepositor!=null) {
 			if((empleadoRepositor instanceof Repositor)==true) {
-<<<<<<< HEAD
-				resultado=((Repositor)empleadoRepositor).agregarNuevaPelicula(this.listaPeliculas, this.listaDePeliculasAlquiladas,nueva);
-=======
 				resultado = empleadoRepositor.agregarNuevaPelicula(this.listaPeliculas,this.listaDePeliculasAlquiladas, nueva);
->>>>>>> ea7ec36c6745116ecaee081a059663e34218441c
 			}
 		}
 		
@@ -50,7 +46,7 @@ public class VideoClub {
 				resultado=((Repositor)empleado).quitarPelicula(this.listaPeliculas,nueva);
 			}
 		}
-		return null;
+		return resultado;
 	}
 	
 	
