@@ -54,5 +54,7 @@ public class Repositor extends Empleado{
 		return nombre;
 	}
 	// elimine el metodo setNombre() porque no creo que sea necesario (Alan)
-
+	/*
+	revise la clase pero para mi ya estaria completa si no me equivoco (Mariano)
+	 */
 }
