@@ -6,7 +6,6 @@ import java.util.Objects;
 public class Repositor extends Empleado{
 	private Integer codigoRepositor;
 	private String nombre;
-	/*private HashSet<Pelicula> peliculas;*/
 
 	public Repositor(String nombre, Integer codigoEmpleado) {
 		super(nombre, codigoEmpleado);
@@ -37,21 +36,7 @@ public class Repositor extends Empleado{
 	public String getNombre() {
 		return nombre;
 	}
-	/*
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		if (!super.equals(o)) return false;
-		Repositor repositor = (Repositor) o;
-		return peliculas.equals(repositor.peliculas);
-	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), peliculas);
-	}
 
-	Lo comento porque ya no era funcional al eliminar el HashSet<Pelicula> peliculas
-	*/
+
 }

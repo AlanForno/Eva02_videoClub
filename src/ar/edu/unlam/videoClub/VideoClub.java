@@ -1,9 +1,7 @@
 package ar.edu.unlam.videoClub;
 
 import java.util.HashSet;
-	/*En realidad esto tendría que ser lo más basico de todo si es que
-	estamos respetando la jerarquia/herencia real (Mariano)
-	 */
+
 public class VideoClub {
 	private String nombre;
 	private HashSet<Cliente>listaCliente;
