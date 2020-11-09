@@ -26,14 +26,13 @@ public class VideoClub {
 	public Boolean agregarEmpleadoRepositorOVendedor(Empleado nuevo) {
 		return listaDeEmpleados.add(nuevo);
 	}
-	
-	public Boolean agregarPelicula(Integer codigoRepositor,Pelicula nueva) {//En teorio estaria terminada
+	public Boolean agregarPelicula(Integer codigoRepositor,Pelicula nueva) {
 		Boolean resultado=false;
 		Empleado empleadoRepositor=encontrarEmpleadoPorId(codigoRepositor);
 		
 		if(empleadoRepositor!=null) {
 			if((empleadoRepositor instanceof Repositor)==true) {
-//				resultado=((Repositor)empleadoRepositor).agregarNuevaPelicula(this.listaPeliculas, this.listaDePeliculasAlquiladas,nueva);
+				resultado=((Repositor)empleadoRepositor).agregarNuevaPelicula(this.listaPeliculas, this.listaDePeliculasAlquiladas,nueva);
 			}
 		}
 		
@@ -67,6 +66,8 @@ public class VideoClub {
 		return resultado;
 	}
 	
+	
+	
 	public Boolean devolverPelicula(Integer idVendedor, Cliente cliente,Pelicula pelicula) {
 		Empleado vendedor=encontrarEmpleadoPorId(idVendedor);
 		Boolean resultado=false;
@@ -74,7 +75,7 @@ public class VideoClub {
 		if(vendedor!=null) {
 			if((vendedor instanceof Vendedor)==true) {
 			resultado=((Vendedor)vendedor).recibirPelicula(this.listaCliente, cliente, this.listaPeliculas, pelicula, this.listaDePeliculasAlquiladas);
-		}
+		  }
 		}
 		
 		
@@ -128,6 +129,16 @@ public class VideoClub {
 	
 	
 	//Aca empizan los metodos Privados
+	
+	public Boolean existe() {
+		Pelicula resultado=encontrarPeliculaDisponiblePorId(1);
+		System.out.println(resultado.getNombre());
+		Boolean respuesta=false;
+		if(resultado!=null) {
+			respuesta=true;
+		}
+		return respuesta;
+	}
 	
 	private Empleado encontrarEmpleadoPorId(Integer codigoRepositor) {//revisar
 	    Empleado resultado=null;

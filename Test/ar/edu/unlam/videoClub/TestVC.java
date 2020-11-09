@@ -11,8 +11,15 @@ public class TestVC {
 
 		VideoClub mania=new VideoClub("VideoMania");
 		Cliente yo=new ClientePremium("Gerardo",1,18,30d);
+		Empleado nuevo=new Repositor("Cristian",1);
+		Pelicula accion=new Pelicula("Rambo",1,30d,18);
 		
-		System.out.println( "Cantidad"+ '\n'+"clientes basicos="+456+'\n'+"clientes medios="+456+'\n'+"cientes premium="+654);
+		
+		assertTrue(mania.agregarCliente(yo));
+		assertTrue(mania.agregarEmpleadoRepositorOVendedor(nuevo));
+		
+		assertTrue(mania.agregarPelicula(1, accion));
+		assertTrue(mania.existe());
 		
 	}
 
