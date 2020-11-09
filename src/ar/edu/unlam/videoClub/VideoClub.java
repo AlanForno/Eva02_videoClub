@@ -27,11 +27,11 @@ public class VideoClub {
 	
 	public Boolean agregarPelicula(Integer codigoRepositor,Pelicula nueva) {//En teorio estaria terminada
 		Boolean resultado=false;
-		Empleado empleadoRepositor=encontrarEmpleadoPorId(codigoRepositor);
+		Repositor empleadoRepositor=((Repositor)encontrarEmpleadoPorId(codigoRepositor));
 		
 		if(empleadoRepositor!=null) {
 			if((empleadoRepositor instanceof Repositor)==true) {
-//				resultado=((Repositor)empleadoRepositor).agregarNuevaPelicula(this.listaPeliculas, this.listaDePeliculasAlquiladas,nueva);
+				resultado = empleadoRepositor.agregarNuevaPelicula(this.listaPeliculas, nueva);
 			}
 		}
 		
