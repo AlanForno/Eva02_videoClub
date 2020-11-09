@@ -1,12 +1,12 @@
 package ar.edu.unlam.videoClub;
 
 import java.util.HashSet;
+import java.util.Objects;
 
 public class Repositor extends Empleado{
 	private Integer codigoRepositor;
 	private String nombre;
-	/*private HashSet<Pelicula> peliculasParaQuitar;*/
-	private HashSet<Pelicula> peliculas;
+	/*private HashSet<Pelicula> peliculas;*/
 
 	public Repositor(String nombre, Integer codigoEmpleado) {
 		super(nombre, codigoEmpleado);
@@ -14,32 +14,16 @@ public class Repositor extends Empleado{
 		this.nombre = nombre;
 	}
 
-	public void agregarNuevaPelicula(Pelicula pelicula) {
-		peliculas.add(pelicula);
+	public Boolean agregarNuevaPelicula(HashSet<Pelicula> listaPeliculas, Pelicula nueva){
+		listaPeliculas.add(nueva);
+		return true;
 	}
 	
-	public void quitarPelicula(Pelicula pelicula) {
-		peliculas.remove(pelicula);
+	public Boolean quitarPelicula(HashSet<Pelicula> listaPeliculas, Pelicula deposito) {
+		listaPeliculas.remove(deposito);
+		return true;
 	}
 
-	/*
-	Comento estos codigos porque no me cierran mucho. (Mariano)
-
-	public HashSet<Pelicula> getPeliculasParaQuitar() {
-		return peliculasParaQuitar;
-	}
-
-	public void setPeliculasParaQuitar(HashSet<Pelicula> peliculasParaQuitar) {
-		this.peliculasParaQuitar = peliculasParaQuitar;
-	}*/
-
-	public HashSet<Pelicula> getPeliculas() {
-		return peliculas;
-	}
-
-	public void setPeliculas(HashSet<Pelicula> peliculas) {
-		this.peliculas = peliculas;
-	}
 
 	public Integer getCodigoRepositor() {
 		return codigoRepositor;
@@ -53,8 +37,21 @@ public class Repositor extends Empleado{
 	public String getNombre() {
 		return nombre;
 	}
-	// elimine el metodo setNombre() porque no creo que sea necesario (Alan)
 	/*
-	revise la clase pero para mi ya estaria completa si no me equivoco (Mariano)
-	 */
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		Repositor repositor = (Repositor) o;
+		return peliculas.equals(repositor.peliculas);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), peliculas);
+	}
+
+	Lo comento porque ya no era funcional al eliminar el HashSet<Pelicula> peliculas
+	*/
 }
