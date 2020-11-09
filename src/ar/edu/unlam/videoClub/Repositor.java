@@ -13,7 +13,7 @@ public class Repositor extends Empleado{
 		this.nombre = nombre;
 	}
 
-	public Boolean agregarNuevaPelicula(HashSet<Pelicula> listaPeliculas, Pelicula nueva){
+	public Boolean agregarNuevaPelicula(HashSet<Pelicula> listaPeliculas, HashSet <Pelicula> listaDePeliculasAlquiladas, Pelicula nueva){
 		listaPeliculas.add(nueva);
 		return true;
 	}
