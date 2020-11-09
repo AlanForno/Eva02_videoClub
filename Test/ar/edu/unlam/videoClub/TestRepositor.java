@@ -15,13 +15,6 @@ public class TestRepositor {
         Pelicula pB= new Pelicula("p4",04,5.0,5);
         Repositor r=new Repositor("Juan",20);
 
-        /* Si lo descomento me tiraria un error
-        listaDePeliculasDePrueba.add(pB);
-         */
-
-        /*
-        La segunda lista seria un poco innecesaria
-         */
         Boolean aux=r.agregarNuevaPelicula(listaDePeliculasDePrueba,lista2,pB);
 
         Assert.assertTrue(aux);
