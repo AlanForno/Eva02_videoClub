@@ -21,13 +21,8 @@ public class Vendedor extends Empleado {
 	// vendedor y ahorramos codigo en videoclub
 
 	public Boolean alquilarACliente(HashSet<Cliente> listaCliente, Cliente cliente, HashSet<Pelicula> listaPeliculas,
-			                        Pelicula pelicula, HashSet<Pelicula> listaDePeliculasAlquiladas) {
-		// recorre la listaDeCliente si posee a cliente, si lo encontro, recorre
-		// listaDePeliculas si tiene pelicula. (podes hacer un metodo privado para
-		// ahorrar codigo
-		// despues usa el metodo de cliente.alquilar(pelicula); si esto es posible, hay
-		// que pensar como restar esa pelicula de la lista de peliculas y agregarla a la
-		// lista de peliculas alquiladas
+			Pelicula pelicula, HashSet<Pelicula> listaDePeliculasAlquiladas) {
+		
 		Boolean seEncontroAlCliente = false;
 		Boolean seAlquiloLaPelicula = false;
 		
@@ -39,20 +34,21 @@ public class Vendedor extends Empleado {
 		if (seEncontroAlCliente == true) {			
 			for (Pelicula peliculas : listaPeliculas) {
 				if (peliculas.getCodigoPelicula().equals(pelicula.getCodigoPelicula())) {
-					// el cliente alquila la pelicula (se agrega a su lista de peliculas)
+					
+					// algo asi seria?
+					if (cliente.alquilarPelicula(pelicula) == false) {
+						return false;
+					} else {
+						
+						// se agrega al registro de peliculas alquiladas
+						listaDePeliculasAlquiladas.add(pelicula);
+						// se borra la pelicula de la lista (se borra del stock)
+						listaDePeliculas.remove(pelicula);
+						
+						seAlquiloLaPelicula = true;
+					}
 					
 					
-					//ponerlo dentro de un if porque puede devolver un false
-					cliente.alquilarPelicula(pelicula);
-					
-					
-					
-					// se agrega al registro de peliculas alquiladas
-					listaDePeliculasAlquiladas.add(pelicula);
-					// se borra la pelicula de la lista (se borra del stock)
-					listaDePeliculas.remove(pelicula);
-					
-					seAlquiloLaPelicula = true;
 				}
 			}
 		}
