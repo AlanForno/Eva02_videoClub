@@ -134,6 +134,24 @@ public class VideoClub {
 		return respuesta;
 	}
 	
+	public Cliente quienAlquilarLaPelicula(Integer idPelicula) {
+		Cliente resultado=null;
+		Pelicula pelicula1=encontrarPeliculaAlquilada(idPelicula);
+		
+		if(pelicula1!=null) {
+			for(Cliente cliente: this.listaCliente) {
+				for(Pelicula pelicula: cliente.getListaDePeliculas()) {
+					if(pelicula.equals(pelicula1)) {
+						resultado=cliente;
+						return resultado;
+					}
+				}
+			}
+		}
+		
+		return resultado;
+	}
+	
 	//Aca empizan los metodos Privados
 	private Empleado encontrarEmpleadoPorId(Integer codigoRepositor) {//revisar
 	    Empleado resultado=null;

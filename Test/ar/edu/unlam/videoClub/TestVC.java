@@ -7,7 +7,7 @@ import org.junit.Test;
 public class TestVC {
 
 	@Test
-	public void test() {
+	public void queSePuedaAgregarUnaPeliculaYComprobarSuExistencia() {
 
 		VideoClub mania=new VideoClub("VideoMania");
 		Cliente yo=new ClientePremium("Gerardo",1,18,30d);
@@ -21,17 +21,9 @@ public class TestVC {
 		assertTrue(mania.agregarPelicula(1, accion));
 		assertTrue(mania.existeLaPelicula(1));
 		
-	}
-
-	@Test
-	public void testuno() {
-
-		VideoClub mania=new VideoClub("VideoMania");
-		Cliente yo=new ClientePremium("Gerardo",1,18,30d);
-		
-		assertTrue(mania.agregarCliente(yo));
 		
 	}
+	
 	@Test 
 	public void queSePuedanAgregarClientesYCantidadDeUsuariosPremium() {
 		VideoClub mania=new VideoClub("VideoMania");
