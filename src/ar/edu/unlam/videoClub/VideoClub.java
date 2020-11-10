@@ -122,9 +122,27 @@ public class VideoClub {
 		return listaDePeliculasAlquiladas;
 	}
 	
+	public Boolean borrarUnCliente(Integer idCliente) {
+		Boolean resultado=false;
+		for(Cliente cliente:this.listaCliente){
+			if(cliente.equals(encontrarClientePorId(idCliente))) {
+				 resultado=this.listaCliente.remove(cliente);
+				 break;
+			}
+		}
+	return resultado;
+	}
 	
 	
-	
+	public Cliente encontrarClientePorId(Integer idCliente) {
+		for(Cliente cliente:this.listaCliente) {
+			if(cliente.getCodigoCliente().equals(idCliente)) {
+				return cliente;
+			}
+		}
+		return null;
+	}
+
 	public Boolean existeLaPelicula(Integer nroPelicula) {
 		Pelicula resultado=encontrarPeliculaDisponiblePorId(nroPelicula);
 		Boolean respuesta=false;

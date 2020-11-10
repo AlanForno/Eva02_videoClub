@@ -67,4 +67,30 @@ public class TestVC {
 		assertFalse(mania.despedirEmpleado(3));
 		assertFalse(mania.despedirEmpleado(4));
 	}
+	
+	@Test
+	public void encontrarClientePorIdYQueSePuedaBorrarUnCliente() {
+		VideoClub mania=new VideoClub("VideoMania");
+		
+		Cliente cliente2=new ClientePremium("Gerardo",2,18,30d);
+		Cliente cliente3=new ClientePremium("Gerardo",3,18,30d);
+		Cliente cliente4=new ClienteMedio("Gerardo",4,18,30d);
+		
+		
+		assertTrue(mania.agregarCliente(cliente2));
+		assertTrue(mania.agregarCliente(cliente3));
+		assertTrue(mania.agregarCliente(cliente4));
+		
+		Cliente re=cliente2;
+		Cliente ro=mania.encontrarClientePorId(2);
+		assertEquals(re,ro);
+		
+		assertTrue(mania.borrarUnCliente(2));
+		
+		
+		
+		assertNull(mania.encontrarClientePorId(2));
+
+		
+	}
 }
