@@ -11,6 +11,7 @@ public class Vendedor extends Empleado {
 	private HashSet<Pelicula> listaDePeliculas;
 	
 	private HashSet<Pelicula> registroDePeliculasAlquiladas;
+	private Integer cantidadPeliculasAlquiladas = 0;
 
 	public Vendedor(String nombre, Integer codigoEmpleado) {
 		super(nombre, codigoEmpleado);
@@ -22,68 +23,65 @@ public class Vendedor extends Empleado {
 
 	public Boolean alquilarACliente(HashSet<Cliente> listaCliente, Cliente cliente, HashSet<Pelicula> listaPeliculas,
 			Pelicula pelicula, HashSet<Pelicula> listaDePeliculasAlquiladas) {
-		
+
 		Boolean seEncontroAlCliente = false;
 		Boolean seAlquiloLaPelicula = false;
-		
+
 		for (Cliente clientes : listaCliente) {
 			if (clientes.getCodigoCliente().equals(cliente.getCodigoCliente())) {
 				seEncontroAlCliente = true;
 			}
 		}
-		if (seEncontroAlCliente == true) {			
+		if (seEncontroAlCliente == true) {
 			for (Pelicula peliculas : listaPeliculas) {
 				if (peliculas.getCodigoPelicula().equals(pelicula.getCodigoPelicula())) {
-					
-					// algo asi seria?
+
 					if (cliente.alquilarPelicula(pelicula) == false) {
+						/*
+						 * En este if evalua si el cliente es capaz de alquilar la pelicula en cuestion
+						 * (condiciones del metodo alquilarPelicula de clase Cliente) Si no puede
+						 * alquilar esta pelicula se sale de este metodo retornando false
+						 */
 						return false;
 					} else {
-						
-						// se agrega al registro de peliculas alquiladas
-						listaDePeliculasAlquiladas.add(pelicula);
-						// se borra la pelicula de la lista (se borra del stock)
-						listaDePeliculas.remove(pelicula);
-						
+						/*
+						 * Este es el caso si el cliente puede alquilar la pelicula
+						 */
+						cliente.alquilarPelicula(pelicula); // Se agrega a su lista de peliculas (Cliente)
+						listaPeliculas.remove(pelicula); // Se borra la pelicula del stock (VideoClub / Vendedor)
+						listaDePeliculasAlquiladas.add(pelicula); // Se agrega al registro de peliculas (Vendedor)
+
+						cantidadPeliculasAlquiladas = listaDePeliculasAlquiladas.size();
+
 						seAlquiloLaPelicula = true;
 					}
-					
-					
+
 				}
 			}
+
 		}
-		
-		
+
 		return seAlquiloLaPelicula;
 	}
 
 	public Boolean recibirPelicula(HashSet<Cliente> listaCliente, Cliente cliente, HashSet<Pelicula> listaPeliculas,
-			                       Pelicula pelicula, HashSet<Pelicula> listaDePeliculasAlquiladas) {
-		// recorre la listaDeCliente si posee a cliente, usa el metodo
-		// cliente.devolverPelicula(pelicula);(podes hacer un metodo privado para
-		// ahorrar codigo) 
-		// entonces a listaPeliculas le agregas pelicula con un add (osea cliente lo devuelve y lo agregas a la lista.
-		// y luego  a listaDePelis le sacas la pelicula.
+			Pelicula pelicula, HashSet<Pelicula> listaDePeliculasAlquiladas) {
+
 		Boolean seRecibioLaPelicula = false;
-		
+
 		for (Cliente clientes : listaCliente) {
 			if (clientes.getCodigoCliente().equals(cliente.getCodigoCliente())) {
-				// el cliente devuelve la peli pasa por parametro (se borra de su lista)
-				
-				//esta ponelo dentro de un if porque puede devolver un false 
-				cliente.devolverPelicula(pelicula);	
-				
-				
-				
-				// se agrega la peli pasada por paraetro a la lista de pelis
-				listaDePeliculas.add(pelicula);
-				// al no estar alquilada porque la devolvio el cliente se borra del registro de alquileres
-				listaDePeliculasAlquiladas.remove(pelicula);
-				
+
+				cliente.devolverPelicula(pelicula); // Se borra la pelicula de la listaDePeliculas (Cliente)
+				listaPeliculas.add(pelicula); // Se agrega al stock de peliculas (VideoClub / Vendedor)
+				listaDePeliculasAlquiladas.remove(pelicula); // Se borra del registro de peliculas en alquiler (Vendedor)
+
+				cantidadPeliculasAlquiladas = listaDePeliculasAlquiladas.size();
+
 				seRecibioLaPelicula = true;
 			}
 		}
-		
+
 		return seRecibioLaPelicula;
 	}
 
@@ -107,8 +105,8 @@ public class Vendedor extends Empleado {
 		return seAlquiloLaPelicula;
 	}
 	
-	public Integer obtenerCantidadPeliculasAlquiladas() {
-		return registroDePeliculasAlquiladas.size();
+	public Integer getCantidadPeliculasAlquiladas() {
+		return cantidadPeliculasAlquiladas;
 	}
 
 
