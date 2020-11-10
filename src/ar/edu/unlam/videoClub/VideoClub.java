@@ -85,8 +85,9 @@ public class VideoClub {
 		Empleado empleado=encontrarEmpleadoPorId(idEmpleado);
 		
 		for(Empleado prueba:this.listaDeEmpleados) {
-			if(prueba.equals(empleado)) {
+			if(prueba.getCodigoEmpleado().equals(empleado.getCodigoEmpleado())) {
 				resultado=this.listaDeEmpleados.remove(prueba);
+				break;
 			}
 		}
 		return resultado;
@@ -126,7 +127,6 @@ public class VideoClub {
 	
 	public Boolean existeLaPelicula(Integer nroPelicula) {
 		Pelicula resultado=encontrarPeliculaDisponiblePorId(nroPelicula);
-		System.out.println(resultado.getNombre());
 		Boolean respuesta=false;
 		if(resultado!=null) {
 			respuesta=true;
