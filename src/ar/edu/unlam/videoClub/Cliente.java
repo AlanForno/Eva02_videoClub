@@ -142,4 +142,31 @@ public abstract class Cliente { // por defecto todos los clientes van a tener es
 		this.dinero += dinero;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigoCliente == null) ? 0 : codigoCliente.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) { // hice un equals, para que dos clientes sean iguales si tienen el mismo codigo
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		if (codigoCliente == null) {
+			if (other.codigoCliente != null)
+				return false;
+		} else if (!codigoCliente.equals(other.codigoCliente))
+			return false;
+		return true;
+	}
+	
+	
+
 }
