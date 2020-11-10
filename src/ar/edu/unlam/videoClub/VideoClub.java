@@ -160,6 +160,30 @@ public class VideoClub {
 	public HashSet<Pelicula> getListaDePeliculasAlquiladas() {
 		return listaDePeliculasAlquiladas;
 	}
+<<<<<<< HEAD
+=======
+	
+	public Boolean borrarUnCliente(Integer idCliente) {
+		Boolean resultado=false;
+		for(Cliente cliente:this.listaCliente){
+			if(cliente.equals(encontrarClientePorId(idCliente))) {
+				 resultado=this.listaCliente.remove(cliente);
+				 break;
+			}
+		}
+	return resultado;
+	}
+	
+	
+	public Cliente encontrarClientePorId(Integer idCliente) {
+		for(Cliente cliente:this.listaCliente) {
+			if(cliente.getCodigoCliente().equals(idCliente)) {
+				return cliente;
+			}
+		}
+		return null;
+	}
+>>>>>>> 92115f3707f590e2bbf72b74318f571348a8cede
 
 	public Boolean existeLaPelicula(Integer nroPelicula) {
 		Pelicula resultado = encontrarPeliculaDisponiblePorId(nroPelicula);
