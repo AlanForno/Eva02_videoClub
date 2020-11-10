@@ -92,19 +92,15 @@ public class VideoClub {
 		return resultado;
 	}
 	
-	public String cantidadDeClientesPorCategoria() {
-		Integer clienteBasico=0;
-		Integer clienteMedio=0;
+	public Integer cantidadDeClientesPremium() {
 		Integer clientePremium=0;
 		
-		for(Cliente cliente:this.listaCliente) {
-			if(cliente instanceof ClienteBasico) {
-				clienteBasico++;
-			}else {if(cliente instanceof ClienteMedio) {
-				clienteMedio++;
-			}else{clientePremium++;}}
+		for(Cliente prueba:this.listaCliente) {
+			if(prueba instanceof ClientePremium) {
+				clientePremium++;
+			}
 		}
-		return "Cantidad"+'\n'+"clientes basicos="+clienteBasico+'\n'+"clientes medios="+clienteMedio+'\n'+"cientes premium="+clientePremium;
+		return clientePremium;
 		
 	}
 	
@@ -126,10 +122,10 @@ public class VideoClub {
 	}
 	
 	
-	//Aca empizan los metodos Privados
 	
-	public Boolean existe() {
-		Pelicula resultado=encontrarPeliculaDisponiblePorId(1);
+	
+	public Boolean existeLaPelicula(Integer nroPelicula) {
+		Pelicula resultado=encontrarPeliculaDisponiblePorId(nroPelicula);
 		System.out.println(resultado.getNombre());
 		Boolean respuesta=false;
 		if(resultado!=null) {
@@ -138,6 +134,7 @@ public class VideoClub {
 		return respuesta;
 	}
 	
+	//Aca empizan los metodos Privados
 	private Empleado encontrarEmpleadoPorId(Integer codigoRepositor) {//revisar
 	    Empleado resultado=null;
 		for(Empleado prueba:this.listaDeEmpleados) {
