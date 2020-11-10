@@ -9,7 +9,7 @@ public class Vendedor extends Empleado {
 	// vendedor extiende de empleado, ya tiene incorporado los atributos.
 
 	private HashSet<Pelicula> listaDePeliculas;
-	
+
 	private HashSet<Pelicula> registroDePeliculasAlquiladas;
 	private Integer cantidadPeliculasAlquiladas = 0;
 
@@ -74,7 +74,8 @@ public class Vendedor extends Empleado {
 
 				cliente.devolverPelicula(pelicula); // Se borra la pelicula de la listaDePeliculas (Cliente)
 				listaPeliculas.add(pelicula); // Se agrega al stock de peliculas (VideoClub / Vendedor)
-				listaDePeliculasAlquiladas.remove(pelicula); // Se borra del registro de peliculas en alquiler (Vendedor)
+				listaDePeliculasAlquiladas.remove(pelicula); // Se borra del registro de peliculas en alquiler
+																// (Vendedor)
 
 				cantidadPeliculasAlquiladas = listaDePeliculasAlquiladas.size();
 
@@ -96,19 +97,18 @@ public class Vendedor extends Empleado {
 		 */
 		Boolean seAlquiloLaPelicula = false;
 		Cliente ejemplo = cliente;
-		
+
 		if (ejemplo.getListaDePeliculas().contains(pelicula) == true) {
 			seAlquiloLaPelicula = true;
 			registroDePeliculasAlquiladas.add(pelicula);
 		}
-		
+
 		return seAlquiloLaPelicula;
 	}
-	
+
 	public Integer getCantidadPeliculasAlquiladas() {
 		return cantidadPeliculasAlquiladas;
 	}
-
 
 	@Override
 	public String getNombre() {

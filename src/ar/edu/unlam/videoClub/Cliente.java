@@ -61,7 +61,7 @@ public abstract class Cliente { // por defecto todos los clientes van a tener es
 
 	private Boolean verificarSiLeAlcanzaYSiCumpleLaEdad(Pelicula pelicula) {
 		if (dinero - pelicula.getValor() >= 0.0) { // si al restarle a su dinero el valor de la pelicula sigue teniendo
-												// dinero.
+													// dinero.
 			if (edad > pelicula.getAptaParaMayoresDe()) {
 				return true;
 			}
@@ -166,7 +166,5 @@ public abstract class Cliente { // por defecto todos los clientes van a tener es
 			return false;
 		return true;
 	}
-	
-	
 
 }
