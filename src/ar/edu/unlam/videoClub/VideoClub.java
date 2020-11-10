@@ -85,26 +85,23 @@ public class VideoClub {
 		Empleado empleado=encontrarEmpleadoPorId(idEmpleado);
 		
 		for(Empleado prueba:this.listaDeEmpleados) {
-			if(prueba.equals(empleado)) {
+			if(prueba.getCodigoEmpleado().equals(empleado.getCodigoEmpleado())) {
 				resultado=this.listaDeEmpleados.remove(prueba);
+				break;
 			}
 		}
 		return resultado;
 	}
 	
-	public String cantidadDeClientesPorCategoria() {
-		Integer clienteBasico=0;
-		Integer clienteMedio=0;
+	public Integer cantidadDeClientesPremium() {
 		Integer clientePremium=0;
 		
-		for(Cliente cliente:this.listaCliente) {
-			if(cliente instanceof ClienteBasico) {
-				clienteBasico++;
-			}else {if(cliente instanceof ClienteMedio) {
-				clienteMedio++;
-			}else{clientePremium++;}}
+		for(Cliente prueba:this.listaCliente) {
+			if(prueba instanceof ClientePremium) {
+				clientePremium++;
+			}
 		}
-		return "Cantidad"+'\n'+"clientes basicos="+clienteBasico+'\n'+"clientes medios="+clienteMedio+'\n'+"cientes premium="+clientePremium;
+		return clientePremium;
 		
 	}
 	
@@ -126,11 +123,10 @@ public class VideoClub {
 	}
 	
 	
-	//Aca empizan los metodos Privados
 	
-	public Boolean existe() {
-		Pelicula resultado=encontrarPeliculaDisponiblePorId(1);
-		System.out.println(resultado.getNombre());
+	
+	public Boolean existeLaPelicula(Integer nroPelicula) {
+		Pelicula resultado=encontrarPeliculaDisponiblePorId(nroPelicula);
 		Boolean respuesta=false;
 		if(resultado!=null) {
 			respuesta=true;
@@ -138,6 +134,25 @@ public class VideoClub {
 		return respuesta;
 	}
 	
+	public Cliente quienAlquilarLaPelicula(Integer idPelicula) {
+		Cliente resultado=null;
+		Pelicula pelicula1=encontrarPeliculaAlquilada(idPelicula);
+		
+		if(pelicula1!=null) {
+			for(Cliente cliente: this.listaCliente) {
+				for(Pelicula pelicula: cliente.getListaDePeliculas()) {
+					if(pelicula.equals(pelicula1)) {
+						resultado=cliente;
+						return resultado;
+					}
+				}
+			}
+		}
+		
+		return resultado;
+	}
+	
+	//Aca empizan los metodos Privados
 	private Empleado encontrarEmpleadoPorId(Integer codigoRepositor) {//revisar
 	    Empleado resultado=null;
 		for(Empleado prueba:this.listaDeEmpleados) {
