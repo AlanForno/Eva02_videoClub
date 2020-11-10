@@ -13,6 +13,7 @@ public class TestRepositor {
     @Test
     public void testQuePruebaAgregarUnaPeliculaNueva(){
         Pelicula pB= new Pelicula("p4",04,5.0,5);
+
         Repositor r=new Repositor("Juan",20);
 
         Boolean aux=r.agregarNuevaPelicula(listaDePeliculasDePrueba,lista2,pB);
