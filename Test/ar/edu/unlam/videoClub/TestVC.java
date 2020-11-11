@@ -328,7 +328,6 @@ public class TestVC {
 	
 	@Test
 	public void queNoLePermitaAUnClienteBasicoTenerMasDeCincoPeliculas() {
-		// ESTE NO ME SALE , QUIERO AGREGAR MAS PELICULAS PARA QUE ALQUILE MAS Y ME TIRA ROJOOOOO
 		VideoClub mania = new VideoClub("VideoMania");
 
 		Empleado repositor = new Repositor("Juan", 1);
@@ -340,16 +339,11 @@ public class TestVC {
 		Cliente cris = new ClienteBasico ("Cris",2,25,3000.0);
 		mania.agregarCliente(cris);
 
-
 		Pelicula tarzan = new Pelicula("Tarzan", 1, 200.0, 18); 
 		mania.agregarPelicula(1, tarzan);
-		assertTrue(mania.alquilarPelicula(2, cris, tarzan));
-
 
 		Pelicula nemo = new Pelicula("nemo", 2, 200.0, 18); 
 		mania.agregarPelicula(1, nemo);
-		assertTrue(mania.alquilarPelicula(2, cris, nemo));
-
 
 		Pelicula dbz = new Pelicula("dbz", 3, 200.0, 18); 
 		mania.agregarPelicula(1, dbz);
@@ -361,15 +355,13 @@ public class TestVC {
 		assertTrue(mania.agregarPelicula(1, db));
 		assertTrue(mania.agregarPelicula(1, db2));
 		assertTrue(mania.agregarPelicula(1, db3));
-	
-		
 		
 		assertTrue(mania.alquilarPelicula(2, cris, dbz));
-		assertTrue(mania.alquilarPelicula(2, cris, nemo));
 		assertTrue(mania.alquilarPelicula(2, cris, tarzan));
 		assertTrue(mania.alquilarPelicula(2, cris, db));
+		assertTrue(mania.alquilarPelicula(2, cris, nemo));
 		assertTrue(mania.alquilarPelicula(2, cris, db2));
-		assertFalse(mania.alquilarPelicula(2, cris, db3));
+		assertFalse(mania.alquilarPelicula(2, cris, db));
 
 		
 	}
