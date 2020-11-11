@@ -23,6 +23,35 @@ public class TestVC {
 		assertTrue(mania.existeLaPelicula(1)); // si se le pone otro codigo no lo encuentra
 
 	}
+	
+	@Test
+	public void queMePermitaAgregarVariasPeliculas() {
+		VideoClub mania = new VideoClub("VideoMania");
+
+		Empleado repositor = new Repositor("Juan", 1);
+		mania.agregarEmpleadoRepositorOVendedor(repositor);
+
+		Empleado vendedor = new Vendedor("jose", 2);
+		assertTrue(mania.agregarEmpleadoRepositorOVendedor(vendedor));
+
+		Pelicula tarzan = new Pelicula("Tarzan", 1, 200.0, 18); 
+		assertTrue(mania.agregarPelicula(1, tarzan));
+
+		Pelicula nemo = new Pelicula("nemo", 2, 200.0, 18); 
+		assertTrue(mania.agregarPelicula(1, nemo));
+		
+		Pelicula dbz = new Pelicula("dbz", 3, 200.0, 18); 
+		assertTrue(mania.agregarPelicula(1, dbz));
+		
+		Cliente cris = new ClienteBasico ("Cris",2,25,3000.0);
+		
+		assertTrue(mania.agregarCliente(cris));
+		assertTrue(mania.alquilarPelicula(2, cris, dbz));
+	
+		
+		
+		
+	}
 
 	@Test
 	public void queSePuedanAgregarCantidadDeUsuariosPremium() {
@@ -131,7 +160,7 @@ public class TestVC {
 	// test para alquiler de peliculas
 
 	@Test
-	public void QuePermitaAlquilarPeliculaAClienteYCompruebeSuDinero() {
+	public void QuePermitaAlquilarPeliculaAClienteBasicoYCompruebeSuDinero() {
 		VideoClub mania = new VideoClub("VideoMania");
 
 		Empleado repositor = new Repositor("Juan", 1); // creo un repositor
@@ -155,6 +184,181 @@ public class TestVC {
 	}
 
 	@Test
+	public void QuePermitaAlquilarPeliculaAClienteMedioConDescuentoYCompruebeSuDinero() {
+		VideoClub mania = new VideoClub("VideoMania");
+
+		Empleado repositor = new Repositor("Juan", 1); // creo un repositor
+		mania.agregarEmpleadoRepositorOVendedor(repositor); // lo agrego
+
+		Pelicula tarzan = new Pelicula("Tarzan", 1, 200.0, 5); // creo una pelicula
+		mania.agregarPelicula(1, tarzan); // agrego la pelicula con el codigo del repositor
+
+		Empleado vendedor = new Vendedor("Jose", 2); // creo un vendedor, con un codigo diferente al repositor.
+		mania.agregarEmpleadoRepositorOVendedor(vendedor); // agrego al vendedor
+
+		Cliente carlos = new ClienteMedio("cris", 1, 20, 1000.0); // creo al cliente
+		mania.agregarCliente(carlos); // lo agrego.
+
+		assertTrue(mania.alquilarPelicula(2, carlos, tarzan)); // el 2 es el codigo del vendedor, un repositor no puede
+																// alquilarle a nadie.
+
+		Double valorActualDelCliente = 820.0; // al cliente premium se le hace un descuento del 10% al valor de la
+												// pelicula
+		assertEquals(valorActualDelCliente, carlos.getDinero());
+
+	}
+
+	@Test
+	public void queNoMePermitaAlquilarAUnClienteBasicoMenorDeLaEdadParaLaPelicula() {
+		VideoClub mania = new VideoClub("VideoMania");
+
+		Empleado repositor = new Repositor("Juan", 1);
+		mania.agregarEmpleadoRepositorOVendedor(repositor);
+
+		Empleado vendedor = new Vendedor("Jose", 2);
+		mania.agregarEmpleadoRepositorOVendedor(vendedor);
+
+		Pelicula tarzan = new Pelicula("Tarzan", 1, 200.0, 18); // la pelicula es para mayores de 18 años
+		mania.agregarPelicula(1, tarzan);
+
+		Cliente carlos = new ClienteMedio("cris", 1, 12, 1000.0);// carlos tiene 12 años.
+		mania.agregarCliente(carlos);
+
+		assertFalse(mania.alquilarPelicula(2, carlos, tarzan)); // el vendedor jose le alquila a carlos tarzan. no puede
+																// porque es menor a la edad.
+
+		Double dineroDeCarlos = 1000.0;
+		assertEquals(dineroDeCarlos, carlos.getDinero()); // no se modifico el dinero de carlos.
+
+	}
+
+	@Test
+	public void queNoPermitaAlquilarSiNoLeAlcanzaElDinero() {
+		VideoClub mania = new VideoClub("VideoMania");
+
+		Empleado repositor = new Repositor("Juan", 1);
+		mania.agregarEmpleadoRepositorOVendedor(repositor);
+
+		Empleado vendedor = new Vendedor("Jose", 2);
+		mania.agregarEmpleadoRepositorOVendedor(vendedor);
+
+		Pelicula tarzan = new Pelicula("Tarzan", 1, 200.0, 18); // la pelicula sale 200
+		mania.agregarPelicula(1, tarzan);
+
+		Cliente carlos = new ClienteMedio("cris", 1, 20, 100.0);// carlos tiene 100.
+		mania.agregarCliente(carlos);
+
+		assertFalse(mania.alquilarPelicula(2, carlos, tarzan)); // el vendedor jose le alquila a carlos tarzan. no puede
+																// porque es no le alcanza el dinero.
+	}
+
+	@Test
+	public void queLePermitaAlquilarAUnClientePremiumAunSiendoMenorDeLaEdad() {
+		VideoClub mania = new VideoClub("VideoMania");
+
+		Empleado repositor = new Repositor("Juan", 1);
+		mania.agregarEmpleadoRepositorOVendedor(repositor);
+
+		Empleado vendedor = new Vendedor("Jose", 2);
+		mania.agregarEmpleadoRepositorOVendedor(vendedor);
+
+		Pelicula tarzan = new Pelicula("Tarzan", 1, 200.0, 25); // esta pelicula es para mayores de 25
+		mania.agregarPelicula(1, tarzan);
+
+		Cliente carlos = new ClientePremium("cris", 1, 20, 1000.0);// cristian tiene 20, no deberia poder verla, pero al
+																	// ser premium si puede
+		mania.agregarCliente(carlos);
+
+		assertTrue(mania.alquilarPelicula(2, carlos, tarzan)); // el vendedor jose le alquila a carlos tarzan. no podria
+																// al ser menor de la edad per como es premium si puede
+	}
+	
+	@Test
+	public void queNoLePermitaAunClienteTenerDosPeliculasIguales() {
+		VideoClub mania = new VideoClub("VideoMania");
+
+		Empleado repositor = new Repositor("Juan", 1);
+		mania.agregarEmpleadoRepositorOVendedor(repositor);
+
+		Empleado vendedor = new Vendedor("Jose", 2);
+		mania.agregarEmpleadoRepositorOVendedor(vendedor);
+
+		Pelicula tarzan = new Pelicula("Tarzan", 1, 200.0, 18); 
+		mania.agregarPelicula(1, tarzan);
+
+		Cliente carlos = new ClienteMedio("cris", 1, 20, 1000.0);
+		mania.agregarCliente(carlos);
+
+		assertTrue(mania.alquilarPelicula(2, carlos, tarzan)); 
+		assertFalse(mania.alquilarPelicula(2, carlos, tarzan));
+	}
+	
+	@Test
+	public void queVerifiqueQueAClienteSeLeAcumulanPeliculas() {
+		VideoClub mania = new VideoClub("VideoMania");
+
+		Empleado repositor = new Repositor("Juan", 1);
+		mania.agregarEmpleadoRepositorOVendedor(repositor);
+
+		Empleado vendedor = new Vendedor("jose", 2);
+		mania.agregarEmpleadoRepositorOVendedor(vendedor);
+
+		Pelicula tarzan = new Pelicula("Tarzan", 1, 200.0, 18); 
+		mania.agregarPelicula(1, tarzan);
+
+		Pelicula nemo = new Pelicula("nemo", 2, 200.0, 18); 
+		mania.agregarPelicula(1, nemo);
+		
+		Pelicula dbz = new Pelicula("dbz", 3, 200.0, 18); 
+		mania.agregarPelicula(1, dbz);
+		
+		Cliente cris = new ClienteBasico ("Cris",2,25,3000.0);
+		
+		assertTrue(mania.agregarCliente(cris));
+		assertTrue(mania.alquilarPelicula(2, cris, dbz));
+		assertTrue(mania.alquilarPelicula(2, cris, nemo));
+		assertTrue(mania.alquilarPelicula(2, cris, tarzan));
+		
+		int cantidadDePeliculasAcumuladas = 3;
+		
+		assertEquals(cantidadDePeliculasAcumuladas, cris.getListaDePeliculas().size());
+
+		
+	}
+	
+	@Test
+	public void queNoLePermitaAUnClienteBasicoTenerMasDeCincoPeliculas() {
+		// ESTE NO ME SALE , QUIERO AGREGAR MAS PELICULAS PARA QUE ALQUILE MAS Y ME TIRA ROJOOOOO
+		VideoClub mania = new VideoClub("VideoMania");
+
+		Empleado repositor = new Repositor("Juan", 1);
+		mania.agregarEmpleadoRepositorOVendedor(repositor);
+
+		Empleado vendedor = new Vendedor("jose", 2);
+		mania.agregarEmpleadoRepositorOVendedor(vendedor);
+
+		Cliente cris = new ClienteBasico ("Cris",2,25,3000.0);
+		mania.agregarCliente(cris);
+		
+		Pelicula tarzan = new Pelicula("Tarzan", 1, 200.0, 18); 
+		mania.agregarPelicula(1, tarzan);
+
+		Pelicula nemo = new Pelicula("nemo", 2, 200.0, 18); 
+		mania.agregarPelicula(1, nemo);
+		
+		Pelicula dbz = new Pelicula("dbz", 3, 200.0, 18); 
+		mania.agregarPelicula(1, dbz);
+	
+		
+		
+		assertTrue(mania.alquilarPelicula(2, cris, dbz));
+		assertTrue(mania.alquilarPelicula(2, cris, nemo));
+		assertTrue(mania.alquilarPelicula(2, cris, tarzan));
+		
+		
+	}
+
+	@Test
 	public void encontrarClientePorIdYQueSePuedaBorrarUnCliente() {
 		VideoClub mania = new VideoClub("VideoMania");
 
@@ -175,22 +379,23 @@ public class TestVC {
 		assertNull(mania.encontrarClientePorId(2));
 
 	}
+
 	@Test
-	public void testQueElimineUnaPeliculaDisponibleCuandoSeAlquile(){
+	public void testQueElimineUnaPeliculaDisponibleCuandoSeAlquile() {
 		Cliente cliente6 = new ClientePremium("Gerardo", 6, 18, 30d);
 		VideoClub mania = new VideoClub("VideoMania");
-		Pelicula pelicula= new Pelicula("pelicula",200,20.0,8);
-		Vendedor vendedor= new Vendedor("Jorge",06);
-		Repositor r= new Repositor("Repo",889);
+		Pelicula pelicula = new Pelicula("pelicula", 200, 20.0, 8);
+		Vendedor vendedor = new Vendedor("Jorge", 06);
+		Repositor r = new Repositor("Repo", 889);
 
-
-		Integer codigo_Emp= vendedor.getCodigoEmpleado();
-		mania.agregarPelicula(codigo_Emp,pelicula);
-		/*Lista peliculas disponibles*/
-		Boolean resultado= mania.alquilarPelicula(codigo_Emp,cliente6,pelicula);
-		/*lista de peliculas alquiladas*/
+		Integer codigo_Emp = vendedor.getCodigoEmpleado();
+		mania.agregarPelicula(codigo_Emp, pelicula);
+		/* Lista peliculas disponibles */
+		Boolean resultado = mania.alquilarPelicula(codigo_Emp, cliente6, pelicula);
+		/* lista de peliculas alquiladas */
 
 		assertFalse(resultado);
 
 	}
+
 }

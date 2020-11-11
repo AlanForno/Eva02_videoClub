@@ -47,9 +47,11 @@ public class Vendedor extends Empleado {
 						/*
 						 * Este es el caso si el cliente puede alquilar la pelicula
 						 */
+						listaDePeliculasAlquiladas.add(pelicula);
+						listaPeliculas.remove(pelicula);
 						cliente.alquilarPelicula(pelicula); // Se agrega a su lista de peliculas (Cliente)
-						listaPeliculas.remove(pelicula); // Se borra la pelicula del stock (VideoClub / Vendedor)
-						listaDePeliculasAlquiladas.add(pelicula); // Se agrega al registro de peliculas (Vendedor)
+						 // Se borra la pelicula del stock (VideoClub / Vendedor)
+						 // Se agrega al registro de peliculas (Vendedor)
 
 						cantidadPeliculasAlquiladas = listaDePeliculasAlquiladas.size();
 
