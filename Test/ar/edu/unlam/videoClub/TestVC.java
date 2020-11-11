@@ -183,11 +183,6 @@ public class TestVC {
 		Repositor r= new Repositor("Repo",889);
 		Vendedor vendedor= new Vendedor("Juan", 20);
 
-		/*
-		1- Agrego el repositor
-		2- agrego la pelicula
-		3- alquilo la pelicula
-		 */
 
 		mania.agregarEmpleadoRepositorOVendedor(r);
 		mania.agregarEmpleadoRepositorOVendedor(vendedor);
@@ -203,7 +198,6 @@ public class TestVC {
 
 		assertFalse(mania.listaDePeliculas().contains(pelicula));
 		assertTrue(mania.getListaDePeliculasAlquiladas().contains(pelicula));
-
 
 	}
 }
