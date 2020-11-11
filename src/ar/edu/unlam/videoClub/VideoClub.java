@@ -45,12 +45,11 @@ public class VideoClub {
 
 	public Boolean agregarPelicula(Integer codigoRepositor, Pelicula nueva) {
 		Boolean resultado = false;
-		Repositor empleadoRepositor = ((Repositor) encontrarEmpleadoPorId(codigoRepositor));
+		Empleado empleadoRepositor =encontrarEmpleadoPorId(codigoRepositor);
 
 		if (empleadoRepositor != null) {
 			if ((empleadoRepositor instanceof Repositor) == true) {
-				resultado = empleadoRepositor.agregarNuevaPelicula(this.listaPeliculas, this.listaDePeliculasAlquiladas,
-						nueva);
+				resultado = ((Repositor)empleadoRepositor).agregarNuevaPelicula(this.listaPeliculas, this.listaDePeliculasAlquiladas,	nueva);
 			}
 		}
 
@@ -215,6 +214,7 @@ public class VideoClub {
 		for (Empleado prueba : this.listaDeEmpleados) {
 			if (prueba.getCodigoEmpleado().equals(codigoRepositor)) {
 				resultado = prueba;
+				break;
 			}
 		}
 		return resultado;

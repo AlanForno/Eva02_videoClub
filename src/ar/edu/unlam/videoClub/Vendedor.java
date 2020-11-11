@@ -2,7 +2,7 @@ package ar.edu.unlam.videoClub;
 
 import java.util.HashSet;
 
-import ar.edu.unlam.videoClub.Cliente;
+//import ar.edu.unlam.videoClub.Cliente;
 
 public class Vendedor extends Empleado {
 
@@ -30,6 +30,7 @@ public class Vendedor extends Empleado {
 		for (Cliente clientes : listaCliente) {
 			if (clientes.getCodigoCliente().equals(cliente.getCodigoCliente())) {
 				seEncontroAlCliente = true;
+				break;
 			}
 		}
 		if (seEncontroAlCliente == true) {
@@ -56,6 +57,7 @@ public class Vendedor extends Empleado {
 						cantidadPeliculasAlquiladas = listaDePeliculasAlquiladas.size();
 
 						seAlquiloLaPelicula = true;
+						break;
 					}
 
 				}

@@ -348,13 +348,23 @@ public class TestVC {
 		
 		Pelicula dbz = new Pelicula("dbz", 3, 200.0, 18); 
 		mania.agregarPelicula(1, dbz);
+		
+		Pelicula db = new Pelicula("d", 4, 200.0, 18); 
+		Pelicula db2 = new Pelicula("d", 5, 200.0, 18); 
+		Pelicula db3 = new Pelicula("d", 6, 200.0, 18); 
+		
+		assertTrue(mania.agregarPelicula(1, db));
+		assertTrue(mania.agregarPelicula(1, db2));
+		assertTrue(mania.agregarPelicula(1, db3));
 	
 		
 		
 		assertTrue(mania.alquilarPelicula(2, cris, dbz));
 		assertTrue(mania.alquilarPelicula(2, cris, nemo));
 		assertTrue(mania.alquilarPelicula(2, cris, tarzan));
-		
+		assertTrue(mania.alquilarPelicula(2, cris, db));
+		assertTrue(mania.alquilarPelicula(2, cris, db2));
+		assertFalse(mania.alquilarPelicula(2, cris, db3));
 		
 	}
 
