@@ -361,11 +361,62 @@ public class TestVC {
 		assertTrue(mania.alquilarPelicula(2, cris, db));
 		assertTrue(mania.alquilarPelicula(2, cris, nemo));
 		assertTrue(mania.alquilarPelicula(2, cris, db2));
+		
 		assertFalse(mania.alquilarPelicula(2, cris, db));
 
 		
 	}
 
+	@Test
+	public void queDevuelvaElClienteUnaPeliculaQueAlquilo() {
+		VideoClub mania = new VideoClub("VideoMania");
+
+		Empleado repositor = new Repositor("Juan", 1);
+		mania.agregarEmpleadoRepositorOVendedor(repositor);
+
+		Empleado vendedor = new Vendedor("jose", 2);
+		mania.agregarEmpleadoRepositorOVendedor(vendedor);
+
+		Cliente cris = new ClienteBasico ("Cris",2,25,3000.0);
+		mania.agregarCliente(cris);
+
+		Pelicula tarzan = new Pelicula("Tarzan", 1, 200.0, 18); 
+		mania.agregarPelicula(1, tarzan);
+
+		Pelicula nemo = new Pelicula("nemo", 2, 200.0, 18); 
+		mania.agregarPelicula(1, nemo);
+
+		Pelicula dbz = new Pelicula("dbz", 3, 200.0, 18); 
+		mania.agregarPelicula(1, dbz);
+		
+		Pelicula db = new Pelicula("d", 4, 200.0, 18); 
+		Pelicula db2 = new Pelicula("d", 5, 200.0, 18); 
+		Pelicula db3 = new Pelicula("d", 6, 200.0, 18); 
+		
+		assertTrue(mania.agregarPelicula(1, db));
+		assertTrue(mania.agregarPelicula(1, db2));
+		assertTrue(mania.agregarPelicula(1, db3));
+		
+		mania.alquilarPelicula(2, cris, dbz);
+		mania.alquilarPelicula(2, cris, tarzan);
+		mania.alquilarPelicula(2, cris, db);
+		mania.alquilarPelicula(2, cris, nemo);
+		mania.alquilarPelicula(2, cris, db2);
+		
+		assertTrue(cris.getListaDePeliculas().contains(nemo)); //cris la tiene porque la alquilo
+		
+		assertFalse(mania.listaDePeliculas().contains(nemo)); // no esta en stock ya que la alquilo.
+		
+		assertTrue(mania.getListaDePeliculasAlquiladas().contains(nemo)); //esta en la lista de alquiladas.
+
+		assertTrue(mania.devolverPelicula(2, cris, nemo)); // cris lo devuelve.
+		
+		assertFalse(cris.getListaDePeliculas().contains(nemo)); // cris ya no lo tiene.
+		
+		assertFalse(mania.getListaDePeliculasAlquiladas().contains(nemo));// ya no esta en la lista de alquiladas.
+		
+		assertTrue(mania.listaDePeliculas().contains(nemo)); //vuelve a estar en stock
+	}
 	@Test
 	public void encontrarClientePorIdYQueSePuedaBorrarUnCliente() {
 		VideoClub mania = new VideoClub("VideoMania");
