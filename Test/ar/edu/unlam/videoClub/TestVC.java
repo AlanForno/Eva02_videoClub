@@ -368,7 +368,7 @@ public class TestVC {
 
 		Pelicula pelicula3= new Pelicula("peli3", 6,20.0,18);
 		mania.agregarPelicula(1,pelicula3);
-
+		assertFalse(mania.alquilarPelicula(2,cris,pelicula3));
 
 		
 	}
