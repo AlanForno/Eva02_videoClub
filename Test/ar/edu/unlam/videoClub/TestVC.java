@@ -192,7 +192,7 @@ public class TestVC {
 		mania.agregarEmpleadoRepositorOVendedor(r);
 
 		Integer codigo_Emp= r.getCodigoEmpleado();
-		mania.agregarPelicula(codigo_Emp,pelicula);
+		//mania.agregarPelicula(codigo_Emp,pelicula);
 		Boolean alquilarPelicula= mania.alquilarPelicula(codigo_Emp,cliente6,pelicula);
 
 		assertFalse(alquilarPelicula);
