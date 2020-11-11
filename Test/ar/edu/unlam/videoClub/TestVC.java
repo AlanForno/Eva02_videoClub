@@ -180,17 +180,26 @@ public class TestVC {
 		Cliente cliente6 = new ClientePremium("Gerardo", 6, 18, 30d);
 		VideoClub mania = new VideoClub("VideoMania");
 		Pelicula pelicula= new Pelicula("pelicula",200,20.0,8);
-		Vendedor vendedor= new Vendedor("Jorge",06);
 		Repositor r= new Repositor("Repo",889);
+		Vendedor vendedor= new Vendedor("Juan", 20);
 
+		/*
+		1- Agrego el repositor
+		2- agrego la pelicula
+		3- alquilo la pelicula
+		 */
 
-		Integer codigo_Emp= vendedor.getCodigoEmpleado();
+		mania.agregarEmpleadoRepositorOVendedor(r);
+
+		Integer codigo_Emp= r.getCodigoEmpleado();
 		mania.agregarPelicula(codigo_Emp,pelicula);
-		/*Lista peliculas disponibles*/
-		Boolean resultado= mania.alquilarPelicula(codigo_Emp,cliente6,pelicula);
-		/*lista de peliculas alquiladas*/
+		Boolean alquilarPelicula= mania.alquilarPelicula(codigo_Emp,cliente6,pelicula);
 
-		assertFalse(resultado);
+		assertFalse(alquilarPelicula);
+
+		assertTrue(mania.listaDePeliculas().contains(pelicula));
+		assertFalse(mania.getListaDePeliculasAlquiladas().contains(pelicula));
+
 
 	}
 }
