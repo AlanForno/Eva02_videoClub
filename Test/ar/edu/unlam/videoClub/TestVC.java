@@ -381,20 +381,9 @@ public class TestVC {
 	}
 
 	@Test
-	public void testQueElimineUnaPeliculaDisponibleCuandoSeAlquile() {
+	public void testQueElimineUnaPeliculaDisponibleCuandoSeAlquile(){
 		Cliente cliente6 = new ClientePremium("Gerardo", 6, 18, 30d);
 		VideoClub mania = new VideoClub("VideoMania");
-<<<<<<< HEAD
-		Pelicula pelicula = new Pelicula("pelicula", 200, 20.0, 8);
-		Vendedor vendedor = new Vendedor("Jorge", 06);
-		Repositor r = new Repositor("Repo", 889);
-
-		Integer codigo_Emp = vendedor.getCodigoEmpleado();
-		mania.agregarPelicula(codigo_Emp, pelicula);
-		/* Lista peliculas disponibles */
-		Boolean resultado = mania.alquilarPelicula(codigo_Emp, cliente6, pelicula);
-		/* lista de peliculas alquiladas */
-=======
 		Pelicula pelicula= new Pelicula("pelicula",200,20.0,8);
 		Repositor r= new Repositor("Repo",889);
 		Vendedor vendedor= new Vendedor("Juan", 20);
@@ -411,7 +400,6 @@ public class TestVC {
 		Boolean alquilarPelicula= mania.alquilarPelicula(codigo_Emp,cliente6,pelicula);
 
 		assertTrue(alquilarPelicula);
->>>>>>> 3a4a8433c2800c81ae384dbaee3e0c6aa25395be
 
 		assertFalse(mania.listaDePeliculas().contains(pelicula));
 		assertTrue(mania.getListaDePeliculasAlquiladas().contains(pelicula));
