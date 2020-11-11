@@ -6,8 +6,6 @@ import java.util.HashSet;
 
 public class Vendedor extends Empleado {
 
-	// vendedor extiende de empleado, ya tiene incorporado los atributos.
-
 	private HashSet<Pelicula> listaDePeliculas;
 
 	private HashSet<Pelicula> registroDePeliculasAlquiladas;
@@ -17,9 +15,6 @@ public class Vendedor extends Empleado {
 		super(nombre, codigoEmpleado);
 		this.registroDePeliculasAlquiladas = new HashSet<Pelicula>();
 	}
-
-	// Mariano te dejo este metodo para desarrollar asi vinculamos cliente con
-	// vendedor y ahorramos codigo en videoclub
 
 	public Boolean alquilarACliente(HashSet<Cliente> listaCliente, Cliente cliente, HashSet<Pelicula> listaPeliculas,
 			Pelicula pelicula, HashSet<Pelicula> listaDePeliculasAlquiladas) {
@@ -48,12 +43,10 @@ public class Vendedor extends Empleado {
 						/*
 						 * Este es el caso si el cliente puede alquilar la pelicula
 						 */
-						listaDePeliculasAlquiladas.add(pelicula);
-						listaPeliculas.remove(pelicula);
-						cliente.alquilarPelicula(pelicula); // Se agrega a su lista de peliculas (Cliente)
-						 // Se borra la pelicula del stock (VideoClub / Vendedor)
-						 // Se agrega al registro de peliculas (Vendedor)
-
+						listaDePeliculasAlquiladas.add(pelicula); // Se agrega a su lista de peliculas (Cliente)
+						listaPeliculas.remove(pelicula); // Se borra la pelicula del stock (VideoClub / Vendedor)
+						cliente.alquilarPelicula(pelicula); // Se agrega al registro de peliculas (Vendedor)
+						
 						cantidadPeliculasAlquiladas = listaDePeliculasAlquiladas.size();
 
 						seAlquiloLaPelicula = true;
@@ -78,8 +71,7 @@ public class Vendedor extends Empleado {
 
 				cliente.devolverPelicula(pelicula); // Se borra la pelicula de la listaDePeliculas (Cliente)
 				listaPeliculas.add(pelicula); // Se agrega al stock de peliculas (VideoClub / Vendedor)
-				listaDePeliculasAlquiladas.remove(pelicula); // Se borra del registro de peliculas en alquiler
-																// (Vendedor)
+				listaDePeliculasAlquiladas.remove(pelicula); // Se borra del registro de peliculas en alquiler (Vendedor)
 
 				cantidadPeliculasAlquiladas = listaDePeliculasAlquiladas.size();
 
@@ -91,14 +83,6 @@ public class Vendedor extends Empleado {
 	}
 
 	public Boolean alquilarPelicula(Pelicula pelicula, Cliente cliente) {
-		/*
-		 * en este caso puse .remove porque alquila una pelicula, osea, la saca de la
-		 * lista
-		 * 
-		 * No se como se utilizaría codigoPelicula y cliente
-		 * 
-		 * (Mariano)
-		 */
 		Boolean seAlquiloLaPelicula = false;
 		Cliente ejemplo = cliente;
 
