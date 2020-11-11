@@ -218,10 +218,10 @@ public class TestVC {
 		Empleado vendedor = new Vendedor("Jose", 2);
 		mania.agregarEmpleadoRepositorOVendedor(vendedor);
 
-		Pelicula tarzan = new Pelicula("Tarzan", 1, 200.0, 18); // la pelicula es para mayores de 18 años
+		Pelicula tarzan = new Pelicula("Tarzan", 1, 200.0, 18); // la pelicula es para mayores de 18 aï¿½os
 		mania.agregarPelicula(1, tarzan);
 
-		Cliente carlos = new ClienteMedio("cris", 1, 12, 1000.0);// carlos tiene 12 años.
+		Cliente carlos = new ClienteMedio("cris", 1, 12, 1000.0);// carlos tiene 12 aï¿½os.
 		mania.agregarCliente(carlos);
 
 		assertFalse(mania.alquilarPelicula(2, carlos, tarzan)); // el vendedor jose le alquila a carlos tarzan. no puede
@@ -339,22 +339,37 @@ public class TestVC {
 
 		Cliente cris = new ClienteBasico ("Cris",2,25,3000.0);
 		mania.agregarCliente(cris);
-		
+
+
 		Pelicula tarzan = new Pelicula("Tarzan", 1, 200.0, 18); 
 		mania.agregarPelicula(1, tarzan);
+		assertTrue(mania.alquilarPelicula(2, cris, tarzan));
+
 
 		Pelicula nemo = new Pelicula("nemo", 2, 200.0, 18); 
 		mania.agregarPelicula(1, nemo);
-		
+		assertTrue(mania.alquilarPelicula(2, cris, nemo));
+
+
 		Pelicula dbz = new Pelicula("dbz", 3, 200.0, 18); 
 		mania.agregarPelicula(1, dbz);
-	
-		
-		
 		assertTrue(mania.alquilarPelicula(2, cris, dbz));
-		assertTrue(mania.alquilarPelicula(2, cris, nemo));
-		assertTrue(mania.alquilarPelicula(2, cris, tarzan));
-		
+
+
+		Pelicula pelicula1= new Pelicula("peli", 4, 50.0,18);
+		mania.agregarPelicula(1,pelicula1);
+		assertTrue(mania.alquilarPelicula(2,cris,pelicula1));
+
+
+		Pelicula pelicula2= new Pelicula("peli2", 5, 50.0,18);
+		mania.agregarPelicula(1, pelicula2);
+		assertTrue(mania.alquilarPelicula(2,cris,pelicula2));
+
+
+		Pelicula pelicula3= new Pelicula("peli3", 6,20.0,18);
+		mania.agregarPelicula(1,pelicula3);
+
+
 		
 	}
 
