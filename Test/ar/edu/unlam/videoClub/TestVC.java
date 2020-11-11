@@ -191,6 +191,7 @@ public class TestVC {
 
 		mania.agregarEmpleadoRepositorOVendedor(r);
 		mania.agregarEmpleadoRepositorOVendedor(vendedor);
+		mania.agregarCliente(cliente6);
 
 		Integer c_E= r.getCodigoRepositor();
 		Integer codigo_Emp= vendedor.getCodigoEmpleado();
