@@ -190,15 +190,18 @@ public class TestVC {
 		 */
 
 		mania.agregarEmpleadoRepositorOVendedor(r);
+		mania.agregarEmpleadoRepositorOVendedor(vendedor);
 
-		Integer codigo_Emp= r.getCodigoEmpleado();
-		//mania.agregarPelicula(codigo_Emp,pelicula);
+		Integer c_E= r.getCodigoRepositor();
+		Integer codigo_Emp= vendedor.getCodigoEmpleado();
+		mania.agregarPelicula(c_E,pelicula);
+
 		Boolean alquilarPelicula= mania.alquilarPelicula(codigo_Emp,cliente6,pelicula);
 
-		assertFalse(alquilarPelicula);
+		assertTrue(alquilarPelicula);
 
-		assertTrue(mania.listaDePeliculas().contains(pelicula));
-		assertFalse(mania.getListaDePeliculasAlquiladas().contains(pelicula));
+		assertFalse(mania.listaDePeliculas().contains(pelicula));
+		assertTrue(mania.getListaDePeliculasAlquiladas().contains(pelicula));
 
 
 	}
